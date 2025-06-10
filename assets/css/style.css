@@ -1,0 +1,167 @@
+/* Custom Stiller & Renk Paleti */
+:root {
+    --bg-dark: #0A0A0A; /* Hafifçe koyulaştırıldı */
+    --bg-soft-dark: #1a1a1a;
+    --text-light: #e0e0e0;
+    --text-dark: #a0a0a0;
+    --brand-gold: #D4AF37;
+    --brand-gold-light: #e6c667;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Lenis smooth scroll için gerekli ayarlar */
+html.lenis {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden; /* Yatay scroll'u engelle */
+    cursor: none; /* Varsayılan imleci gizle */
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+}
+
+.gradient-text-gold {
+    background: linear-gradient(90deg, #e6c667, #b88a2a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* Navigasyon barı için arka plan bulanıklığı */
+.nav-blur {
+    background-color: rgba(10, 10, 10, 0.85); /* Arka planı daha opak hale getir */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* İçerikten ayırmak için gölge ekle */
+}
+
+/* Yüklenirken elementleri gizle */
+.g-fade-up {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Yeni Aurora Arka Plan Efekti */
+.aurora-bg {
+    position: relative;
+    z-index: 1;
+}
+.aurora-bg::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 800px;
+    height: 90vh;
+    max-height: 800px;
+    background-image: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 60%);
+    z-index: -1;
+    opacity: 0;
+    animation: fadeInGlow 2s 1s forwards ease-out;
+}
+
+@keyframes fadeInGlow {
+    to { opacity: 0.8; }
+}
+
+/* Süreç adımları için aktif durum */
+.process-step.is-active h3, .process-step.is-active .step-number {
+     color: var(--brand-gold-light);
+     transform: scale(1.05);
+}
+.process-step {
+    transition: color 0.5s ease, transform 0.5s ease;
+}
+
+/* Basitleştirilmiş Özel İmleç */
+.cursor {
+    width: 20px;
+    height: 20px;
+    background-color: var(--brand-gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: none; /* Tüm animasyonları kaldır */
+}
+
+/* Geliştirilmiş Hizmet Kartları */
+.service-card {
+    background: rgba(26, 26, 26, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(4px);
+}
+.service-card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.service-card:hover:before {
+    opacity: 1;
+}
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+.service-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Portfolyo Görsel Efekti */
+.portfolio-item .image-container {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+.portfolio-item img {
+     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.portfolio-item:hover img {
+    transform: scale(1.05);
+}
+
+header {
+    z-index: 1000;
+    transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+}
+
+header.scrolled {
+    background-color: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+    transition: transform 0.3s ease;
+} 

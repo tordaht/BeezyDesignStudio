@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beezy Design Studio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.js for 3D animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111111;
+            color: #E0E0E0;
+            overflow-x: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .content-layer {
+            position: relative;
+            z-index: 2;
+        }
+        .glass-effect {
+            background: rgba(17, 17, 17, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gold-text {
+            color: #FFD700;
+        }
+        .gold-border {
+            border-color: #FFD700;
+        }
+        .gold-bg {
+            background-color: #FFD700;
+        }
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 3D Arka Plan Canvas -->
+    <div id="hero-canvas"></div>
+
+    <!-- Ana İçerik -->
+    <div class="content-layer">
+
+        <!-- Header -->
+        <header class="fixed top-0 left-0 right-0 py-4 px-4 md:px-8 glass-effect transition-all duration-300">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://i.imgur.com/eB4gQ5d.png" alt="Beezy Logo Amblem" class="h-8 w-auto">
+                    <span class="text-xl font-bold tracking-wider text-white">beezy <span class="font-light">| designstudio</span></span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="nav-link text-sm font-medium" data-lang-key="nav_services">Hizmetler</a>
+                    <a href="#work" class="nav-link text-sm font-medium" data-lang-key="nav_work">Projeler</a>
+                    <a href="#contact" class="nav-link text-sm font-medium" data-lang-key="nav_contact">İletişim</a>
+                </nav>
+
+                <!-- Language Switcher -->
+                <div>
+                    <button id="lang-switcher" class="text-sm font-semibold border border-gray-500 rounded-full px-3 py-1 hover:bg-gray-700 hover:border-gray-400 transition">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="h-screen flex items-center justify-center text-center px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight" data-lang-key="hero_title">
+                    Fikirleri <span class="gold-text">Unutulmaz</span> Deneyimlere Dönüştürüyoruz.
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto" data-lang-key="hero_subtitle">
+                    Yaratıcı tasarımlar ve kusursuz kodlarla markanızın dijital dünyadaki potansiyelini ortaya çıkarıyoruz.
+                </p>
+                <a href="#contact" class="mt-10 inline-block gold-bg text-black font-bold py-3 px-8 rounded-full text-lg hover:bg-opacity-90 transition-transform transform hover:scale-105" data-lang-key="hero_cta">
+                    Projenizi Başlatın
+                </a>
+            </div>
+        </main>
+
+        <!-- Services Section -->
+        <section id="services" class="section container mx-auto py-20 md:py-32 px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-lang-key="services_title">Hizmetlerimiz</h2>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12" data-lang-key="services_subtitle">Markanızı bir sonraki seviyeye taşımak için bütünsel çözümler sunuyoruz.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="glass-effect p-8 rounded-2xl text-center hover:border-yellow-400/50 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="mb-4 inline-block p-4 bg-gray-800 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFD700" viewBox="0 0 256 256"><path d="M236,96a52.12,52.12,0,0,0-45.73-49.89,59.91,59.91,0,0,0-111.82,15.81A44,44,0,0,0,52,144a43.68,43.68,0,0,0,8,26.62L22.42,208.2A8,8,0,0,0,28,220a7.88,7.88,0,0,0,5.58-2.42L72,176h24a44,44,0,0,0,44-44,59.91,59.91,0,0,0,46.27-26.11A52.12,52.12,0,0,0,236,96Zm-16,0a36,36,0,0,1-66.27,21.89A59.91,59.91,0,0,0,140,64a44,44,0,0,1,43.87-43.9A36,36,0,0,1,220,96Zm-96-48a44,44,0,0,1,16,84.62L85.38,160H72a28,28,0,0,1-28-28,27.75,27.75,0,0,1,5.27-16.11A59.91,59.91,0,0,0,76,32,43.68,43.68,0,0,1,124,20.11A44,44,0,0,1,124,48Z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-2 text-white" data-lang-key="service1_title">UI/UX Tasarımı</h3>
+                    <p class="text-gray-400" data-lang-key="service1_desc">Kullanıcı odaklı, estetik ve işlevsel arayüzler tasarlayarak dijital ürünlerinizi kullanıcılar için bir zevke dönüştürüyoruz.</p>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="glass-effect p-8 rounded-2xl text-center hover:border-yellow-400/50 transition-all duration-300 transform hover:-translate-y-2">
+                     <div class="mb-4 inline-block p-4 bg-gray-800 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFD700" viewBox="0 0 256 256"><path d="M69.54,105.54a8,8,0,0,1,0,11.31l-48,48a8,8,0,0,1-11.32-11.31L52.69,108,10.22,65.54a8,8,0,0,1,11.32-11.32l48,48Zm117-60a8,8,0,0,0-11.32,0l-48,48a8,8,0,0,0,11.32,11.31L180.69,64l42.49,42.42a8,8,0,0,0,11.32-11.32l-48-48Zm-22.63,45.37,32,32a8,8,0,0,1-11.32,11.32l-32-32a8,8,0,0,1,11.32-11.32Zm-64,0a8,8,0,0,0-11.32,11.32l32,32a8,8,0,0,0,11.32-11.32Z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-2 text-white" data-lang-key="service2_title">Web Geliştirme</h3>
+                    <p class="text-gray-400" data-lang-key="service2_desc">En son teknolojileri kullanarak hızlı, güvenli ve ölçeklenebilir web siteleri ve uygulamaları hayata geçiriyoruz.</p>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="glass-effect p-8 rounded-2xl text-center hover:border-yellow-400/50 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="mb-4 inline-block p-4 bg-gray-800 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFD700" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-88a8,8,0,0,1,8-8,56,56,0,0,1,56,56,8,8,0,0,1-16,0,40,40,0,0,0-40-40,8,8,0,0,1-8-8Z"></path></svg></div>
+                    <h3 class="text-xl font-bold mb-2 text-white" data-lang-key="service3_title">Marka Kimliği</h3>
+                    <p class="text-gray-400" data-lang-key="service3_desc">Markanızın hikayesini anlatan, hedef kitlenizle bağ kuran logolar ve kapsamlı kurumsal kimlikler oluşturuyoruz.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="section container mx-auto py-20 md:py-32 px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-lang-key="work_title">Seçilmiş Projeler</h2>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12" data-lang-key="work_subtitle">İlham veren markalar için ürettiğimiz çözümlere göz atın.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://placehold.co/800x600/1a1a1a/444444?text=Proje+1" alt="Proje 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-2xl font-bold text-white" data-lang-key="project1_title">Teknoloji Platformu</h3>
+                        <p class="text-gray-300" data-lang-key="project1_cat">Web Tasarım</p>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://placehold.co/800x600/1a1a1a/444444?text=Proje+2" alt="Proje 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-2xl font-bold text-white" data-lang-key="project2_title">Moda Markası</h3>
+                        <p class="text-gray-300" data-lang-key="project2_cat">Marka Kimliği</p>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                 <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://placehold.co/800x600/1a1a1a/444444?text=Proje+3" alt="Proje 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-2xl font-bold text-white" data-lang-key="project3_title">Mobil Uygulama</h3>
+                        <p class="text-gray-300" data-lang-key="project3_cat">UI/UX Tasarımı</p>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://placehold.co/800x600/1a1a1a/444444?text=Proje+4" alt="Proje 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8">
+                        <h3 class="text-2xl font-bold text-white" data-lang-key="project4_title">E-ticaret Sitesi</h3>
+                        <p class="text-gray-300" data-lang-key="project4_cat">Geliştirme</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section container mx-auto py-20 md:py-32 px-4">
+             <div class="text-center">
+                 <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight" data-lang-key="contact_title">
+                    Bir fikriniz mi var?<br>Hadi <span class="gold-text">gerçeğe</span> dönüştürelim.
+                </h2>
+                <p class="mt-4 text-lg text-gray-400" data-lang-key="contact_subtitle">Aşağıdaki butona tıklayarak bize ulaşın, projenizi konuşalım.</p>
+                <a href="mailto:hello@beezystudio.com" class="mt-10 inline-block gold-bg text-black font-bold py-3 px-8 rounded-full text-lg hover:bg-opacity-90 transition-transform transform hover:scale-105" data-lang-key="contact_cta">
+                    hello@beezystudio.com
+                </a>
+             </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-800 py-8 px-4">
+            <div class="container mx-auto text-center text-gray-500">
+                <p>&copy; <span id="footer-year">2025</span> Beezy Design Studio. <span data-lang-key="footer_rights">Tüm hakları saklıdır.</span></p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- TEXT CONTENT FOR BILINGUAL SUPPORT ---
+        const translations = {
+            'tr': {
+                nav_services: 'Hizmetler',
+                nav_work: 'Projeler',
+                nav_contact: 'İletişim',
+                hero_title: 'Fikirleri <span class="gold-text">Unutulmaz</span> Deneyimlere Dönüştürüyoruz.',
+                hero_subtitle: 'Yaratıcı tasarımlar ve kusursuz kodlarla markanızın dijital dünyadaki potansiyelini ortaya çıkarıyoruz.',
+                hero_cta: 'Projenizi Başlatın',
+                services_title: 'Hizmetlerimiz',
+                services_subtitle: 'Markanızı bir sonraki seviyeye taşımak için bütünsel çözümler sunuyoruz.',
+                service1_title: 'UI/UX Tasarımı',
+                service1_desc: 'Kullanıcı odaklı, estetik ve işlevsel arayüzler tasarlayarak dijital ürünlerinizi kullanıcılar için bir zevke dönüştürüyoruz.',
+                service2_title: 'Web Geliştirme',
+                service2_desc: 'En son teknolojileri kullanarak hızlı, güvenli ve ölçeklenebilir web siteleri ve uygulamaları hayata geçiriyoruz.',
+                service3_title: 'Marka Kimliği',
+                service3_desc: 'Markanızın hikayesini anlatan, hedef kitlenizle bağ kuran logolar ve kapsamlı kurumsal kimlikler oluşturuyoruz.',
+                work_title: 'Seçilmiş Projeler',
+                work_subtitle: 'İlham veren markalar için ürettiğimiz çözümlere göz atın.',
+                project1_title: 'Teknoloji Platformu',
+                project1_cat: 'Web Tasarım',
+                project2_title: 'Moda Markası',
+                project2_cat: 'Marka Kimliği',
+                project3_title: 'Mobil Uygulama',
+                project3_cat: 'UI/UX Tasarımı',
+                project4_title: 'E-ticaret Sitesi',
+                project4_cat: 'Geliştirme',
+                contact_title: 'Bir fikriniz mi var?<br>Hadi <span class="gold-text">gerçeğe</span> dönüştürelim.',
+                contact_subtitle: 'Aşağıdaki butona tıklayarak bize ulaşın, projenizi konuşalım.',
+                contact_cta: 'hello@beezystudio.com',
+                footer_rights: 'Tüm hakları saklıdır.'
+            },
+            'en': {
+                nav_services: 'Services',
+                nav_work: 'Work',
+                nav_contact: 'Contact',
+                hero_title: 'Transforming Ideas into <span class="gold-text">Unforgettable</span> Experiences.',
+                hero_subtitle: 'We unleash your brand\'s potential in the digital world with creative designs and flawless code.',
+                hero_cta: 'Start Your Project',
+                services_title: 'Our Services',
+                services_subtitle: 'We provide holistic solutions to take your brand to the next level.',
+                service1_title: 'UI/UX Design',
+                service1_desc: 'We turn your digital products into a pleasure for users by designing user-centric, aesthetic, and functional interfaces.',
+                service2_title: 'Web Development',
+                service2_desc: 'We bring fast, secure, and scalable websites and applications to life using the latest technologies.',
+                service3_title: 'Brand Identity',
+                service3_desc: 'We create logos and comprehensive corporate identities that tell your brand\'s story and connect with your target audience.',
+                work_title: 'Selected Work',
+                work_subtitle: 'Check out the solutions we have produced for inspiring brands.',
+                project1_title: 'Technology Platform',
+                project1_cat: 'Web Design',
+                project2_title: 'Fashion Brand',
+                project2_cat: 'Brand Identity',
+                project3_title: 'Mobile App',
+                project3_cat: 'UI/UX Design',
+                project4_title: 'E-commerce Site',
+                project4_cat: 'Development',
+                contact_title: 'Have an idea?<br>Let\'s make it <span class="gold-text">real</span>.',
+                contact_subtitle: 'Contact us by clicking the button below to discuss your project.',
+                contact_cta: 'hello@beezystudio.com',
+                footer_rights: 'All rights reserved.'
+            }
+        };
+
+        // --- LANGUAGE SWITCHER LOGIC ---
+        const langSwitcher = document.getElementById('lang-switcher');
+        let currentLang = 'tr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+            langSwitcher.textContent = lang === 'tr' ? 'EN' : 'TR';
+        }
+
+        langSwitcher.addEventListener('click', () => {
+            const newLang = currentLang === 'tr' ? 'en' : 'tr';
+            setLanguage(newLang);
+        });
+
+        // Initialize with default language
+        setLanguage('tr');
+
+
+        // --- SCROLL ANIMATION ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // --- FOOTER YEAR ---
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+
+        // --- THREE.JS ANIMATION ---
+        let scene, camera, renderer, particles;
+
+        function initThreeJS() {
+            const container = document.getElementById('hero-canvas');
+
+            // Scene
+            scene = new THREE.Scene();
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+            
+            // Particles
+            const particleCount = 5000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+
+            for(let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 0.015,
+                color: 0xFFD700, // Gold color
+                transparent: true,
+                blending: THREE.AdditiveBlending
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onMouseMove, false);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        let mouseX = 0, mouseY = 0;
+        function onMouseMove(event) {
+            mouseX = (event.clientX - window.innerWidth / 2) / 100;
+            mouseY = (event.clientY - window.innerHeight / 2) / 100;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.0001;
+            
+            particles.rotation.x = time * 0.25;
+            particles.rotation.y = time * 0.5;
+
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+        
+        // --- INITIALIZATION ---
+        initThreeJS();
+        animate();
+
+    </script>
+</body>
+</html>

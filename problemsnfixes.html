@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proje Gelişim ve Hata Takip Raporu - Beezy WebSite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --bg-dark: #0A0A0A;
+            --bg-soft-dark: #1a1a1a;
+            --text-light: #e0e0e0;
+            --text-dark: #a0a0a0;
+            --brand-gold: #D4AF37;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --success: #22c55e;
+            --warning: #f97316;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+        }
+        .details-icon::before {
+            content: '\\f078';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        details[open] .details-icon::before {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased p-4 sm:p-6 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Proje Gelişim Raporu</h1>
+            <p class="text-lg text-gray-400">Beezy WebSite - Seri No: v1.1.0</p>
+        </header>
+
+        <main class="space-y-6">
+            
+            <!-- Çözülen Sorun: İmleç Animasyonu -->
+            <details class="bg-gray-900/50 border border-[var(--border-color)] rounded-lg overflow-hidden">
+                <summary class="p-5 cursor-pointer flex justify-between items-center list-none">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-check-circle text-[var(--success)] text-xl"></i>
+                        <div>
+                            <h2 class="font-semibold text-lg text-white">Özel İmleç (Cursor) Performansı İyileştirildi</h2>
+                            <p class="text-sm text-gray-400">İmleç animasyonları kaldırıldı ve anlık tepki verecek şekilde yeniden yapılandırıldı.</p>
+                        </div>
+                    </div>
+                    <span class="details-icon text-gray-500"></span>
+                </summary>
+                <div class="px-5 pb-5 border-t border-[var(--border-color)]">
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Problem Detayı</h3>
+                    <p class="text-gray-300">Önceki versiyonda kullanılan özel imlecin yumuşatma (smoothing) ve büyüme/küçülme animasyonları, kullanıcı deneyiminde yavaşlama ve "kasma" hissine neden oluyordu. Bu durum, sayfanın genel tepkiselliğini olumsuz etkiliyordu.</p>
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Uygulanan Çözüm</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li>GSAP kütüphanesi ile yapılan animasyonlu pozisyon takibi (`gsap.to`) kaldırıldı.</li>
+                        <li>İmleç pozisyonu artık doğrudan JavaScript ile (`cursor.style.left`, `cursor.style.top`) anlık olarak güncelleniyor.</li>
+                        <li>Etkileşimli elemanların üzerine gelindiğinde çalışan `grow` efekti ve ilgili CSS/JS kodları tamamen kaldırıldı.</li>
+                        <li>İmlecin stili, animasyonsuz, içi dolu, sabit boyutlu ve `--brand-gold` renginde olacak şekilde basitleştirildi.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Çözülen Sorun: Yavaş Kaydırma -->
+            <details class="bg-gray-900/50 border border-[var(--border-color)] rounded-lg overflow-hidden">
+                <summary class="p-5 cursor-pointer flex justify-between items-center list-none">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-check-circle text-[var(--success)] text-xl"></i>
+                        <div>
+                            <h2 class="font-semibold text-lg text-white">Yumuşak Kaydırma (Smooth Scroll) Hızı Artırıldı</h2>
+                            <p class="text-sm text-gray-400">Sayfa kaydırma deneyimi daha tepkisel hale getirildi.</p>
+                        </div>
+                    </div>
+                    <span class="details-icon text-gray-500"></span>
+                </summary>
+                <div class="px-5 pb-5 border-t border-[var(--border-color)]">
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Problem Detayı</h3>
+                    <p class="text-gray-300">`Lenis` kütüphanesi ile eklenen yumuşak kaydırma efektinin varsayılan ayarı, kullanıcı girdisine göre yavaş kalıyordu. Bu durum, sayfanın "ağır" veya "gecikmeli" hissettirmesine yol açıyordu.</p>
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Uygulanan Çözüm</h3>
+                    <p class="text-gray-300">Lenis kütüphanesinin `lerp` (linear interpolation) değeri `0.1`'den `0.15`'e yükseltildi. Bu değişiklik, kaydırma animasyonunun kullanıcının fiziksel kaydırma hareketini daha hızlı takip etmesini sağlayarak daha anlık ve tepkisel bir deneyim sunar, ancak pürüzsüz hissiyatı tamamen ortadan kaldırmaz.</p>
+                </div>
+            </details>
+            
+            <!-- Geliştirme: Kod Yapısı -->
+            <details class="bg-gray-900/50 border border-[var(--border-color)] rounded-lg overflow-hidden">
+                <summary class="p-5 cursor-pointer flex justify-between items-center list-none">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-check-circle text-[var(--success)] text-xl"></i>
+                        <div>
+                            <h2 class="font-semibold text-lg text-white">Kod Yeniden Yapılandırıldı (Refactoring)</h2>
+                            <p class="text-sm text-gray-400">JavaScript kodları daha modüler ve yönetilebilir hale getirildi.</p>
+                        </div>
+                    </div>
+                    <span class="details-icon text-gray-500"></span>
+                </summary>
+                <div class="px-5 pb-5 border-t border-[var(--border-color)]">
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Problem Detayı</h3>
+                    <p class="text-gray-300">Tüm JavaScript kodları tek bir `DOMContentLoaded` olayı içinde yer alıyordu. Bu durum, kodun okunabilirliğini, bakımını ve yeni özellik eklemeyi zorlaştırıyordu. "Sihirli sayılar" ve tekrar eden seçiciler (selectors) kod içinde dağınık haldeydi.</p>
+                    <h3 class="font-semibold mt-4 mb-2 text-amber-400">Uygulanan Çözüm</h3>
+                     <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li>Tek büyük fonksiyon, her biri kendi sorumluluğuna sahip (`initSmoothScroll`, `initCustomCursor`, `initAnimations`) daha küçük ve isimlendirilmiş fonksiyonlara ayrıldı.</li>
+                        <li>Tüm sihirli sayılar ve seçiciler, kodun başında tanımlanmış `SETTINGS` ve `SELECTORS` nesneleri içinde toplandı. Bu, gelecekteki değişiklikleri tek bir yerden yapmayı kolaylaştırır.</li>
+                        <li>Genel kod yapısı daha organize ve anlaşılır hale getirildi, bu da kod kalitesini artırdı ve SonarSource gibi analiz araçlarının önerilerine uygun hale geldi.</li>
+                    </ul>
+                </div>
+            </details>
+
+        </main>
+    </div>
+    <script>
+        // Google Fonts'u yüklemek için dummy script
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+        document.head.appendChild(link);
+    </script>
+</body>
+</html> 
