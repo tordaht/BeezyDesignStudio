@@ -7,7 +7,17 @@
     --brand-gold: #D4AF37;
     --brand-gold-light: #e6c667;
     --border-color: rgba(255, 255, 255, 0.1);
+    --primary-hover: scale(1.05);
 }
+
+body[data-theme="light"] {
+    --bg-dark: #ffffff;
+    --bg-soft-dark: #f5f5f5;
+    --text-light: #1a1a1a;
+    --text-dark: #333333;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+
 
 /* Lenis smooth scroll için gerekli ayarlar */
 html.lenis {
@@ -113,6 +123,9 @@ h1, h2, h3, h4 {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     backdrop-filter: blur(4px);
 }
+body[data-theme="light"] .service-card {
+    background: rgba(255, 255, 255, 0.6);
+}
 .service-card:before {
     content: "";
     position: absolute;
@@ -150,6 +163,15 @@ h1, h2, h3, h4 {
     transform: scale(1.05);
 }
 
+/* Mikro Etkileşimler için Proje Kartı */
+.project-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: var(--primary-hover);
+}
+
 header {
     z-index: 1000;
     transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
@@ -161,7 +183,22 @@ header.scrolled {
     -webkit-backdrop-filter: blur(10px); /* Safari support */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+body[data-theme="light"] header.scrolled {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
 
 .logo-container {
     transition: transform 0.3s ease;
-} 
+}
+
+/* Basit İletişim Formu Stili */
+#contact-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+/* Blog Sayfası Stili */
+.blog-post { border: 1px solid var(--border-color); padding: 1rem; border-radius: 0.5rem; background-color: var(--bg-soft-dark); }
+.blog-post img { border-radius: 0.5rem; }
+#drop-area { transition: background-color 0.3s ease; }
+

@@ -21,16 +21,22 @@
     <header id="main-header" class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50">
         <div class="logo-container">
             <a href="index.html" class="flex items-center space-x-3">
-                <img src="assets/images/beezy-logo.png" alt="Beezy Studio Logo" class="h-10">
+                <img loading="lazy" class="lazy-load h-10" data-src="assets/images/beezy-logo.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Beezy Studio Logo">
                 <span class="text-2xl font-bold">Beezy Studio</span>
             </a>
         </div>
-        <nav>
+        <nav class="flex items-center space-x-6">
             <ul class="flex space-x-8 text-lg">
-                <li><a href="index.html#services" class="hover:text-amber-400 transition-colors">Hizmetler</a></li>
-                <li><a href="portfolio.html" class="hover:text-amber-400 transition-colors">Portfolyo</a></li>
-                <li><a href="index.html#contact" class="hover:text-amber-400 transition-colors">İletişim</a></li>
+                <li><a data-i18n="navServices" href="index.html#services" class="hover:text-amber-400 transition-colors">Hizmetler</a></li>
+                <li><a data-i18n="navProjects" href="portfolio.html" class="hover:text-amber-400 transition-colors">Portfolyo</a></li>
+                <li><a data-i18n="navBlog" href="blog.html" class="hover:text-amber-400 transition-colors">Blog</a></li>
+                <li><a data-i18n="navContact" href="index.html#contact" class="hover:text-amber-400 transition-colors">İletişim</a></li>
             </ul>
+            <select id="lang-toggle" class="bg-gray-800 text-white px-2 py-1 rounded ml-4">
+                <option value="tr">TR</option>
+                <option value="en">EN</option>
+            </select>
+            <button id="theme-toggle" class="px-2 py-1 border rounded">🌓</button>
         </nav>
     </header>
 
@@ -78,8 +84,8 @@
             <div class="mt-20">
                 <h2 class="text-4xl font-bold text-center mb-10 g-fade-up">Proje Galerisi</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+1" class="rounded-lg w-full"></div>
-                    <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+2" class="rounded-lg w-full"></div>
+                    <div class="g-fade-up"><img loading="lazy" class="lazy-load rounded-lg w-full" data-src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="></div>
+                    <div class="g-fade-up"><img loading="lazy" class="lazy-load rounded-lg w-full" data-src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+2" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="></div>
                 </div>
             </div>
         </div>
@@ -90,6 +96,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/i18n-theme.js"></script>
 
 </body>
 </html> 

@@ -39,13 +39,21 @@
                 <img src="assets/images/beezy-logo.png" alt="Beezy Design Studio Logo" class="h-full w-auto">
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#services" class="text-gray-300 hover:text-white transition-colors">Hizmetler</a>
-                <a href="#process" class="text-gray-300 hover:text-white transition-colors">Süreç</a>
-                <a href="portfolio.html" class="text-gray-300 hover:text-white transition-colors">Projeler</a>
+                <a data-i18n="navServices" href="#services" class="text-gray-300 hover:text-white transition-colors">Hizmetler</a>
+                <a data-i18n="navProcess" href="#process" class="text-gray-300 hover:text-white transition-colors">Süreç</a>
+                <a data-i18n="navProjects" href="portfolio.html" class="text-gray-300 hover:text-white transition-colors">Projeler</a>
+                <a data-i18n="navBlog" href="blog.html" class="text-gray-300 hover:text-white transition-colors">Blog</a>
             </div>
-            <a href="#contact" class="hidden md:block bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-amber-900/40">
-                İletişime Geç
-            </a>
+            <div class="flex items-center space-x-4">
+                <select id="lang-toggle" class="bg-gray-800 text-white px-2 py-1 rounded">
+                  <option value="tr">TR</option>
+                  <option value="en">EN</option>
+                </select>
+                <button id="theme-toggle" class="px-2 py-1 border rounded">🌓</button>
+                <a data-i18n="navContact" href="#contact" class="hidden md:block bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-amber-900/40">
+                    İletişime Geç
+                </a>
+            </div>
         </nav>
     </header>
 
@@ -59,17 +67,17 @@
                     Midjourney Prompt Önerisi:
                     A stunning, abstract 3D visualization of collective intelligence, a swarm of golden light particles flowing together to create a complex, hive-like neural network structure, dark atmospheric background with deep magenta and cyan highlights, cinematic lighting, photorealistic, octane render, 8k --ar 16:9 --style raw --v 6.0
                 -->
-                <img src="assets/images/beezy-studio-kreatif-ajans-istanbul-hero.jpg" alt="Yaratıcı enerji ve kolektif zekayı temsil eden soyut arkaplan" class="w-full h-full object-cover opacity-40">
+                <img loading="lazy" class="lazy-load w-full h-full object-cover opacity-40" data-src="assets/images/beezy-studio-kreatif-ajans-istanbul-hero.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Yaratıcı enerji ve kolektif zekayı temsil eden soyut arkaplan">
             </div>
 
             <div class="relative z-10 px-4">
-                <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white max-w-5xl mx-auto !leading-tight tracking-tight">
+                <h1 data-i18n="heroTitle" id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white max-w-5xl mx-auto !leading-tight tracking-tight">
                     <span class="g-char">İş</span> <span class="g-char">Stratejilerini</span> <span class="g-char">Sanata</span> <span class="gradient-text-gold g-char">Dönüştüren</span> <span class="g-char">Yaratıcı</span> <span class="g-char">Ajans</span>
                 </h1>
-                <p id="hero-subtitle" class="text-lg md:text-xl text-gray-400 mt-8 max-w-3xl mx-auto opacity-0">
+                <p data-i18n="heroSubtitle" id="hero-subtitle" class="text-lg md:text-xl text-gray-400 mt-8 max-w-3xl mx-auto opacity-0">
                     Beezy, İstanbul merkezli bir tasarım stüdyosu olarak M.I.C.E., Motion Graphics ve 2D/3D Tasarım alanlarında markanızın potansiyelini ortaya çıkarır.
                 </p>
-                <a id="hero-button" href="portfolio.html" class="mt-12 inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold px-8 py-3 rounded-lg hover:bg-amber-400 hover:text-black transition-all duration-300 opacity-0">
+                <a data-i18n="heroButton" id="hero-button" href="portfolio.html" class="mt-12 inline-block bg-transparent border-2 border-amber-400 text-amber-400 font-bold px-8 py-3 rounded-lg hover:bg-amber-400 hover:text-black transition-all duration-300 opacity-0">
                     Çalışmalarımızı Keşfet
                 </a>
             </div>
@@ -79,8 +87,8 @@
         <section id="services" class="py-24 md:py-32 bg-black">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-20">
-                    <h2 class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Hizmetlerimiz</h2>
-                    <p class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">
+                    <h2 data-i18n="servicesHeading" class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Hizmetlerimiz</h2>
+                    <p data-i18n="servicesIntro" class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">
                         Stratejik Hedeflerinize Ulaşmanız İçin Yaratıcı Çözümler
                     </p>
                 </div>
@@ -110,8 +118,8 @@
         <section id="process" class="py-24 md:py-40">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-24">
-                    <h2 class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Yaklaşımımız</h2>
-                    <p class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">Her Adımda Stratejik Sinerji</p>
+                    <h2 data-i18n="processHeading" class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Yaklaşımımız</h2>
+                    <p data-i18n="processIntro" class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">Her Adımda Stratejik Sinerji</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-20">
                     <!-- Süreç adımları -->
@@ -151,22 +159,22 @@
         <section id="portfolio" class="py-24 md:py-32 bg-black">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-20">
-                    <h2 class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Seçilmiş Projeler</h2>
-                    <p class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">Markalar İçin Yarattığımız Değer</p>
+                    <h2 data-i18n="selectedProjects" class="text-sm font-bold uppercase tracking-widest text-amber-400 g-fade-up">Seçilmiş Projeler</h2>
+                    <p data-i18n="createdValue" class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">Markalar İçin Yarattığımız Değer</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-10">
-                    <div class="g-fade-up portfolio-item">
+                    <div class="g-fade-up portfolio-item project-card">
                         <div class="image-container group">
-                           <img src="assets/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg" alt="Kurumsal Kimlik Yenileme Projesi" class="w-full h-auto object-cover"/>
+                           <img loading="lazy" class="lazy-load w-full h-auto object-cover" data-src="assets/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Kurumsal Kimlik Yenileme Projesi"/>
                         </div>
                         <div class="p-4">
                             <h3 class="text-2xl font-bold text-white mt-2">Kurumsal Kimlik Yenileme</h3>
                             <p class="mt-2 text-gray-400"><span class="font-semibold text-gray-200">Sonuç:</span> Etkileşimi %87 artıran ve pazar payını genişleten bütünleşik marka kimliği.</p>
                         </div>
                     </div>
-                     <div class="g-fade-up md:mt-24 portfolio-item">
+                     <div class="g-fade-up md:mt-24 portfolio-item project-card">
                          <div class="image-container group">
-                           <img src="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg" alt="Dijital Fuar Deneyimi Projesi" class="w-full h-auto object-cover"/>
+                           <img loading="lazy" class="lazy-load w-full h-auto object-cover" data-src="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Dijital Fuar Deneyimi Projesi"/>
                         </div>
                         <div class="p-4">
                             <h3 class="text-2xl font-bold text-white mt-2">Dijital Fuar Deneyimi</h3>
@@ -198,9 +206,12 @@
                 <h2 class="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto !leading-tight g-fade-up">Markanızın hikayesini birlikte yeniden yazalım mı?</h2>
                 <p class="mt-6 text-xl text-gray-400 g-fade-up">Projenizi ve hedeflerinizi görüşmek için bize ulaşın.</p>
                 <div class="mt-12 g-fade-up">
-                     <a href="mailto:hello@beezy.ist" class="text-3xl md:text-4xl font-semibold text-white border-b-2 border-amber-400 hover:text-amber-400 transition-colors duration-300 pb-2">
-                        hello@beezy.ist
-                     </a>
+                     <form id="contact-form" class="space-y-4">
+                        <label for="email" class="block text-lg">E-posta:</label>
+                        <input type="email" id="email" class="form-input text-black w-full px-4 py-2 rounded" required>
+                        <span id="email-error" class="text-red-500 text-sm" aria-live="polite"></span>
+                        <button type="submit" class="mt-2 bg-amber-500 text-black font-semibold px-6 py-2 rounded">Gönder</button>
+                     </form>
                 </div>
                 <!-- Social Links -->
                 <div class="mt-16 g-fade-up">
@@ -228,6 +239,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/i18n-theme.js"></script>
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', (e) => {
+        const emailField = document.getElementById('email');
+        if (!emailField.validity.valid) {
+          document.getElementById('email-error').textContent = 'Lütfen geçerli bir e-posta adresi giriniz';
+          e.preventDefault();
+        }
+      });
+    </script>
 
 </body>
 </html> 

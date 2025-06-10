@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Beezy Design Studio</title>
+    <meta name="description" content="Beezy Design Studio'nun yaratıcı tasarım trendleri ve ipuçlarını paylaştığı blog sayfası.">
+    <meta name="keywords" content="tasarım blogu, yaratıcı trendler, beezy studio">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.beezy.ist/blog.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="antialiased">
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="h-10 w-auto">
+                <img src="assets/images/beezy-logo.png" alt="Beezy Design Studio Logo" class="h-full w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a data-i18n="navServices" href="index.html#services" class="text-gray-300 hover:text-white transition-colors">Hizmetler</a>
+                <a data-i18n="navProcess" href="index.html#process" class="text-gray-300 hover:text-white transition-colors">Süreç</a>
+                <a data-i18n="navProjects" href="portfolio.html" class="text-gray-300 hover:text-white transition-colors">Projeler</a>
+                <a data-i18n="navBlog" href="blog.html" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <select id="lang-toggle" class="bg-gray-800 text-white px-2 py-1 rounded">
+                    <option value="tr">TR</option>
+                    <option value="en">EN</option>
+                </select>
+                <button id="theme-toggle" class="px-2 py-1 border rounded">🌓</button>
+                <a data-i18n="navContact" href="index.html#contact" class="hidden md:block bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-amber-900/40">
+                    İletişime Geç
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main class="pt-32 container mx-auto px-6 space-y-12" id="blog-container">
+        <!-- Blog posts will be injected here -->
+    </main>
+    <div class="text-center mt-10">
+        <a data-i18n="adminLink" href="admin.html" class="text-gray-400 underline">Admin Paneli</a>
+    </div>
+    <footer class="py-8 border-t border-gray-800/50 mt-16">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2024 Beezy Design Studio. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+    <script src="assets/js/blog.js"></script>
+    <script src="assets/js/i18n-theme.js"></script>
+</body>
+</html>

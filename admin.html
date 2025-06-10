@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Yönetimi - Beezy Design Studio</title>
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      #drop-area{ border:2px dashed var(--border-color); padding:2rem; text-align:center; cursor:pointer; }
+      #drop-area.bg-gray-700{ background-color:#374151; }
+    </style>
+</head>
+<body class="antialiased p-6">
+    <div class="flex justify-end space-x-4 mb-4">
+        <select id="lang-toggle" class="bg-gray-800 text-white px-2 py-1 rounded">
+            <option value="tr">TR</option>
+            <option value="en">EN</option>
+        </select>
+        <button id="theme-toggle" class="px-2 py-1 border rounded">🌓</button>
+    </div>
+    <h1 class="text-3xl font-bold mb-6">Blog Yazısı Oluştur</h1>
+    <div id="drop-area" class="mb-4">Görseli buraya sürükleyin veya tıklayın (800x600px)</div>
+    <input type="file" id="file-input" accept="image/*" class="hidden">
+    <div class="mb-4">
+        <label for="headline" class="block mb-1">Başlık</label>
+        <input id="headline" type="text" class="w-full text-black px-4 py-2 rounded">
+    </div>
+    <div class="mb-4">
+        <label for="content" class="block mb-1">İçerik</label>
+        <textarea id="content" rows="5" class="w-full text-black px-4 py-2 rounded"></textarea>
+    </div>
+    <button id="save-btn" class="bg-amber-500 text-black font-semibold px-6 py-2 rounded">Kaydet</button>
+    <script src="assets/js/admin.js"></script>
+    <script src="assets/js/i18n-theme.js"></script>
+</body>
+</html>
