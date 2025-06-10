@@ -181,3 +181,8 @@ header.scrolled {
     max-width: 400px;
     margin: 0 auto;
 }
+/* Blog Sayfası Stili */
+.blog-post { border: 1px solid var(--border-color); padding: 1rem; border-radius: 0.5rem; background-color: var(--bg-soft-dark); }
+.blog-post img { border-radius: 0.5rem; }
+#drop-area { transition: background-color 0.3s ease; }
+
