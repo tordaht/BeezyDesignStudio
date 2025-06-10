@@ -1,0 +1,63 @@
+<header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <a href="/<%= lng %>/" class="h-10 w-auto">
+            <img src="/assets/images/beezy-logo.png" alt="Beezy Design Studio Logo" class="h-full w-auto">
+        </a>
+        
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center space-x-6">
+            <a href="/<%= lng %>/#services" class="nav-link"><%= t('nav.services') %></a>
+            <a href="/<%= lng %>/portfolio" class="nav-link"><%= t('nav.portfolio') %></a>
+            <a href="/<%= lng %>/blog" class="nav-link"><%= t('nav.blog') %></a>
+             <!-- Dil ve Tema Değiştirici -->
+            <div class="flex items-center justify-center lg:ml-4">
+                <button id="theme-toggle" class="text-amber-400 hover:text-white transition-colors duration-300 focus:outline-none w-10 h-10 rounded-full flex items-center justify-center" title="<%= t('theme.toggle_' + (lng === 'dark' ? 'light' : 'dark')) %>">
+                    <i id="theme-toggle-dark-icon" class="fas fa-moon text-xl hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fas fa-sun text-xl hidden"></i>
+                </button>
+                <% const otherLang = lng === 'tr' ? 'en' : 'tr'; %>
+                <% const newUrl = originalUrl.replace(`/${lng}`, `/${otherLang}`); %>
+                <div class="ml-2 text-sm font-bold">
+                    <a href="#" class="text-white hover:text-amber-400 uppercase"><%= lng %></a>
+                    <span class="text-gray-500">/</span>
+                    <a href="<%= newUrl %>" class="text-gray-500 hover:text-amber-400 uppercase"><%= otherLang %></a>
+                </div>
+            </div>
+            <a href="/<%= lng %>/#contact" class="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-amber-900/40">
+                <%= t('nav.contact') %>
+            </a>
+        </div>
+
+        <!-- Mobile Nav Toggle -->
+        <div class="md:hidden flex items-center">
+            <button id="nav-toggle" class="text-white focus:outline-none">
+                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Content -->
+    <div id="nav-content" class="hidden md:hidden bg-black/80 backdrop-blur-md">
+        <a href="/<%= lng %>/#services" class="block py-2 px-6 text-white hover:bg-amber-500"><%= t('nav.services') %></a>
+        <a href="/<%= lng %>/portfolio" class="block py-2 px-6 text-white hover:bg-amber-500"><%= t('nav.portfolio') %></a>
+        <a href="/<%= lng %>/blog" class="block py-2 px-6 text-white hover:bg-amber-500"><%= t('nav.blog') %></a>
+        <a href="/<%= lng %>/#contact" class="block py-2 px-6 text-white hover:bg-amber-500"><%= t('nav.contact') %></a>
+        <div class="border-t border-gray-700 my-2"></div>
+        <!-- Mobil Dil ve Tema Değiştirici -->
+        <div class="flex items-center justify-center py-4">
+            <button id="theme-toggle-mobile" class="text-amber-400 hover:text-white transition-colors duration-300 focus:outline-none w-10 h-10 rounded-full flex items-center justify-center">
+                <!-- Icons will be handled by JS -->
+            </button>
+            <% const otherLangMobile = lng === 'tr' ? 'en' : 'tr'; %>
+            <% const newUrlMobile = originalUrl.replace(`/${lng}`, `/${otherLangMobile}`); %>
+            <div class="ml-4 text-sm font-bold">
+                <a href="#" class="text-white hover:text-amber-400 uppercase"><%= lng %></a>
+                <span class="text-gray-500">/</span>
+                <a href="<%= newUrlMobile %>" class="text-gray-500 hover:text-amber-400 uppercase"><%= otherLangMobile %></a>
+            </div>
+        </div>
+    </div>
+</header> 

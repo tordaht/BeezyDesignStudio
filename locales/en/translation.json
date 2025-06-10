@@ -1,0 +1,37 @@
+{
+    "nav": {
+        "home": "Home",
+        "portfolio": "Our Works",
+        "blog": "Blog",
+        "contact": "Contact"
+    },
+    "theme": {
+        "toggle_light": "Light Mode",
+        "toggle_dark": "Dark Mode"
+    },
+    "lang": {
+        "current": "EN",
+        "switch_to": "TR"
+    },
+    "index_hero_title": "The Creative Agency That Turns Business Strategies Into Art",
+    "index_hero_subtitle": "As a design studio based in Istanbul, Beezy unlocks your brand's potential in M.I.C.E., Motion Graphics, and 2D/3D Design.",
+    "index_services_title": "Our Services",
+    "index_services_subtitle": "Creative Solutions to Achieve Your Strategic Goals",
+    "portfolio_title": "Our Works",
+    "portfolio_subtitle": "Discover how we add value to brands with projects that combine creativity and technology.",
+    "view_details": "View Details",
+    "project_summary": "Project Summary",
+    "technologies_used": "Technologies Used",
+    "back_to_portfolio": "Back to Portfolio",
+    "blog_title": "Blog",
+    "blog_subtitle": "Industry News, Tips, and Inspiring Stories",
+    "read_article": "Read Article",
+    "no_blog_posts": "No blog posts have been added yet.",
+    "back_to_blog": "Back to Blog",
+    "footer_about": "We provide creative solutions that unlock your brand's potential, combining strategy with art.",
+    "footer_quick_links": "Quick Links",
+    "footer_contact_info": "Contact Info",
+    "footer_address": "Istanbul, Turkey",
+    "footer_follow_us": "Follow Us",
+    "footer_rights_reserved": "All rights reserved."
+} 

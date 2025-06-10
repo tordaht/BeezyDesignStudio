@@ -1,12 +1,34 @@
 /* Custom Stiller & Renk Paleti */
 :root {
-    --bg-dark: #0A0A0A; /* Hafifçe koyulaştırıldı */
-    --bg-soft-dark: #1a1a1a;
-    --text-light: #e0e0e0;
-    --text-dark: #a0a0a0;
+    /* Hem Light hem Dark modda kullanılan sabitler */
     --brand-gold: #D4AF37;
     --brand-gold-light: #e6c667;
+
+    /* Light Tema Renkleri (Varsayılan) */
+    --bg-main: #F5F5F5;
+    --bg-soft: #FFFFFF;
+    --text-main: #111827;
+    --text-soft: #6B7280;
+    --border-color: #E5E7EB;
+    --header-bg: rgba(245, 245, 245, 0.7);
+    --nav-blur-bg: rgba(245, 245, 245, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-hover-border: #d1d5db;
+    --card-glow-bg: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(0, 0, 0, 0.05), transparent 40%);
+}
+
+.dark {
+    /* Dark Tema Değişkenlerini Tanımla */
+    --bg-main: #0A0A0A;
+    --bg-soft: #1a1a1a;
+    --text-main: #e0e0e0;
+    --text-soft: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.1);
+    --header-bg: rgba(10, 10, 10, 0.7);
+    --nav-blur-bg: rgba(10, 10, 10, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-hover-border: rgba(255, 255, 255, 0.15);
+    --card-glow-bg: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%);
 }
 
 /* Lenis smooth scroll için gerekli ayarlar */
@@ -22,10 +44,11 @@ html.lenis {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
+    background-color: var(--bg-main);
+    color: var(--text-main);
     overflow-x: hidden; /* Yatay scroll'u engelle */
     cursor: none; /* Varsayılan imleci gizle */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4 {
@@ -42,11 +65,12 @@ h1, h2, h3, h4 {
 
 /* Navigasyon barı için arka plan bulanıklığı */
 .nav-blur {
-    background-color: rgba(10, 10, 10, 0.85); /* Arka planı daha opak hale getir */
+    background-color: var(--nav-blur-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* İçerikten ayırmak için gölge ekle */
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Yüklenirken elementleri gizle */
@@ -82,8 +106,7 @@ h1, h2, h3, h4 {
 
 /* Süreç adımları için aktif durum */
 .process-step.is-active h3, .process-step.is-active .step-number {
-     color: var(--brand-gold-light);
-     transform: scale(1.05);
+     color: var(--brand-gold);
 }
 .process-step {
     transition: color 0.5s ease, transform 0.5s ease;
@@ -104,13 +127,13 @@ h1, h2, h3, h4 {
 
 /* Geliştirilmiş Hizmet Kartları */
 .service-card {
-    background: rgba(26, 26, 26, 0.4);
+    background: var(--bg-soft);
     border: 1px solid var(--border-color);
     border-radius: 1rem;
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
     backdrop-filter: blur(4px);
 }
 .service-card:before {
@@ -120,7 +143,7 @@ h1, h2, h3, h4 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 40%);
+    background: var(--card-glow-bg);
     z-index: 0;
     opacity: 0;
     transition: opacity 0.5s;
@@ -130,12 +153,13 @@ h1, h2, h3, h4 {
 }
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--card-hover-border);
 }
 .service-card > * {
     position: relative;
     z-index: 1;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* Portfolyo Görsel Efekti */
@@ -144,7 +168,7 @@ h1, h2, h3, h4 {
     overflow: hidden;
 }
 .portfolio-item img {
-     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .portfolio-item:hover img {
     transform: scale(1.05);
@@ -156,12 +180,95 @@ header {
 }
 
 header.scrolled {
-    background-color: rgba(10, 10, 10, 0.7);
+    background-color: var(--header-bg);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .logo-container {
     transition: transform 0.3s ease;
-} 
+}
+
+/* Dark Tema Kuralları */
+.dark body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+.dark .nav-link, .dark .text-white {
+    color: var(--text-main) !important;
+}
+.dark .nav-link:hover {
+    color: var(--brand-gold) !important;
+}
+.dark .nav-blur {
+    background-color: var(--nav-blur-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-color);
+}
+.dark .service-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border-color);
+}
+.dark .service-card:hover {
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--card-hover-border);
+}
+.dark .process-step.is-active h3, .dark .process-step.is-active .step-number {
+     color: var(--brand-gold-light);
+}
+.dark header.scrolled {
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Diğer renk sorunlarını çözmek için ek kurallar */
+.dark .text-gray-400 {
+    color: var(--text-soft);
+}
+.dark .text-white {
+    color: var(--text-main) !important;
+}
+.dark .bg-black {
+    background-color: var(--bg-main) !important;
+}
+.dark a.nav-link {
+    color: var(--text-main);
+}
+.dark a.nav-link:hover {
+    color: var(--brand-gold);
+}
+
+/* Dark modda Tailwind'in üzerine yazılması gereken genel kurallar */
+.dark .text-gray-400 { color: var(--text-soft) !important; }
+.dark .text-white { color: var(--text-main) !important; }
+.dark .bg-black { background-color: var(--bg-main) !important; }
+.dark a.text-gray-300 { color: var(--text-soft) !important; }
+.dark a:hover.text-white { color: var(--brand-gold-light) !important; }
+
+/* Light modda başlık linklerinin rengi */
+a.nav-link { color: var(--text-main); transition: color 0.3s ease; }
+a.nav-link:hover { color: var(--brand-gold); }
+
+/* Dark modda başlık linklerinin rengi */
+.dark a.nav-link { color: var(--text-main); }
+.dark a.nav-link:hover { color: var(--brand-gold-light); }
+
+/* --- Tema Bazlı Tailwind Geçersiz Kılmaları --- */
+
+/* Varsayılan (Light) Tema */
+.bg-black { background-color: var(--bg-soft) !important; }
+.text-white, .text-gray-200, .text-gray-300 { color: var(--text-main); }
+.text-gray-400 { color: var(--text-soft); }
+a.nav-link { color: var(--text-main); transition: color 0.3s ease; }
+a.nav-link:hover { color: var(--brand-gold); }
+
+/* Dark Tema */
+.dark .bg-black { background-color: var(--bg-main) !important; }
+.dark .text-white, .dark .text-gray-200, .dark .text-gray-300 { color: var(--text-main) !important; }
+.dark .text-gray-400 { color: var(--text-soft) !important; }
+.dark a.nav-link { color: var(--text-main); }
+.dark a.nav-link:hover { color: var(--brand-gold-light); }
+.dark a.text-gray-300 { color: var(--text-soft) !important; }
+.dark a:hover.text-white { color: var(--brand-gold-light) !important; } 

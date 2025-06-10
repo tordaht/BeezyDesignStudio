@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <%- include('partials/head') %>
+    <title><%= post.title %> - Beezy Design Studio</title>
+    <style>
+        .prose-custom {
+            color: theme('colors.gray.300');
+        }
+        .prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4, .prose-custom strong {
+            color: theme('colors.white');
+        }
+        .prose-custom p, .prose-custom ul, .prose-custom ol {
+             margin-bottom: 1em;
+             line-height: 1.7;
+        }
+        .prose-custom a {
+            color: theme('colors.amber.400');
+            text-decoration: underline;
+        }
+        .prose-custom a:hover {
+            color: theme('colors.amber.300');
+        }
+        .prose-custom ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans leading-normal tracking-wider">
+    <%- include('partials/header') %>
+
+    <main class="pt-32 pb-20">
+        <div class="container mx-auto px-4">
+
+            <!-- Yazı Başlığı -->
+            <div class="text-center mb-12 g-fade-up">
+                <a href="/<%= lng %>/blog" class="text-amber-400 hover:underline mb-4 inline-block"><i class="fas fa-arrow-left"></i> <%= t('back_to_blog') %></a>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight"><%= post.title[lng] %></h1>
+                <p class="text-lg text-gray-400 mt-4"><%= post.author %> - <%= new Date(post.publish_date).toLocaleDateString(lng, { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+            </div>
+
+            <!-- Ana Görsel -->
+            <div class="mb-12 g-fade-up">
+                <div class="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-2xl shadow-amber-500/10">
+                    <img src="<%= post.cover_image %>" alt="<%= post.title[lng] %>" class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <!-- Yazı İçeriği -->
+            <div class="max-w-4xl mx-auto g-fade-up">
+                 <article class="prose-custom text-lg">
+                    <%- post.content[lng] %>
+                 </article>
+            </div>
+        </div>
+    </main>
+    
+    <%- include('partials/footer') %>
+    <%- include('partials/scripts') %>
+</body>
+</html> 

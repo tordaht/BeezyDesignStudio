@@ -137,4 +137,30 @@ KULLANILAN YARATICI EFEKTLERİN LİSTESİ:
 Bu efektler tasarım ajansının yaratıcı kimliğini yansıtıyor ve 
 modern web standartlarına uygun şekilde optimize edilmiştir.
 
-==================================================================== 
+====================================================================
+
+Bu dosya, proje geliştirme sırasında karşılaşılan hataları, nedenlerini ve çözümlerini kaydetmek için kullanılır. Amaç, aynı hataların tekrarlanmasını önlemek ve ekip için bir bilgi birikimi oluşturmaktır.
+
+---
+
+**HATA KAYDI FORMATI**
+
+**Tarih:** YYYY-AA-GG
+**Proje:** Proje Adı
+**Hata:** Karşılaşılan hatanın kısa ve net bir tanımı.
+**Yer:** Hatanın meydana geldiği dosya(lar) ve satır numaraları (varsa).
+**Neden:** Hatanın temel kök nedeni.
+**Çözüm:** Hatanın nasıl düzeltildiğine dair adımlar.
+---
+
+**Tarih:** 2024-05-21
+**Proje:** Beezy WebSite
+**Hata:** Web sitesindeki iç sayfaların linkleri çalışmıyor ve ana sayfa hero bölümü statik bir resim içeriyor.
+**Yer:** `views/*.ejs` dosyalarındaki `<a>` etiketleri ve `views/index.ejs` hero bölümü.
+**Neden:** Sayfa linkleri, dil parametresini (`/:lng`) içerecek şekilde dinamik olarak oluşturulmamış. `href="/portfolio"` gibi statik linkler, `/:lng/portfolio` rotasıyla eşleşmiyor. Ana sayfa hero bölümü de statik bir resim kullanıyor ve daha dinamik bir görünüme ihtiyaç duyuyor.
+**Çözüm:** 
+1. Tüm `.ejs` şablonlarındaki (`index.ejs`, `portfolio.ejs`, `partials/header.ejs` vb.) iç linkler, `href="/<%= lng %>/sayfa"` formatında güncellendi.
+2. Ana sayfadaki (`index.ejs`) statik hero resmi, Three.js tabanlı, markanın sarı/kehribar tonlarını kullanan dinamik bir parçacık animasyonu ile değiştirildi.
+3. Animasyon kodu, daha temiz bir yapı için `views/partials/hero-animation.ejs` adında bir partial dosyasına ayrıldı.
+4. Animasyon için gerekli Three.js kütüphaneleri `index.ejs` dosyasına eklendi.
+--- 

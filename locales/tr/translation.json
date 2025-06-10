@@ -1,0 +1,37 @@
+{
+    "nav": {
+        "home": "Ana Sayfa",
+        "portfolio": "Çalışmalarımız",
+        "blog": "Blog",
+        "contact": "İletişim"
+    },
+    "theme": {
+        "toggle_light": "Aydınlık Mod",
+        "toggle_dark": "Karanlık Mod"
+    },
+    "lang": {
+        "current": "TR",
+        "switch_to": "EN"
+    },
+    "index_hero_title": "İş Stratejilerini Sanata Dönüştüren Yaratıcı Ajans",
+    "index_hero_subtitle": "Beezy, İstanbul merkezli bir tasarım stüdyosu olarak M.I.C.E., Motion Graphics ve 2D/3D Tasarım alanlarında markanızın potansiyelini ortaya çıkarır.",
+    "index_services_title": "Hizmetlerimiz",
+    "index_services_subtitle": "Stratejik Hedeflerinize Ulaşmanız İçin Yaratıcı Çözümler",
+    "portfolio_title": "Çalışmalarımız",
+    "portfolio_subtitle": "Yaratıcılık ve teknolojiyi birleştirdiğimiz projelerle markalara nasıl değer kattığımızı keşfedin.",
+    "view_details": "Detayları Gör",
+    "project_summary": "Proje Özeti",
+    "technologies_used": "Kullanılan Teknolojiler",
+    "back_to_portfolio": "Portfolyoya Dön",
+    "blog_title": "Blog",
+    "blog_subtitle": "Sektörden Haberler, İpuçları ve İlham Veren Hikayeler",
+    "read_article": "Yazıyı Oku",
+    "no_blog_posts": "Henüz hiç blog yazısı eklenmemiş.",
+    "back_to_blog": "Blog'a Dön",
+    "footer_about": "Markanızın potansiyelini ortaya çıkaran, stratejiyi sanatla birleştiren yaratıcı çözümler sunuyoruz.",
+    "footer_quick_links": "Hızlı Linkler",
+    "footer_contact_info": "İletişim Bilgileri",
+    "footer_address": "İstanbul, Türkiye",
+    "footer_follow_us": "Bizi Takip Edin",
+    "footer_rights_reserved": "Tüm hakları saklıdır."
+} 

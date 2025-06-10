@@ -1,0 +1,42 @@
+<footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Hakkında -->
+            <div>
+                <h3 class="font-bold text-xl mb-4 text-amber-400">Beezy Studio</h3>
+                <p class="text-gray-400"><%= t('footer_about') %></p>
+            </div>
+            <!-- Hızlı Linkler -->
+            <div>
+                <h3 class="font-bold text-xl mb-4 text-amber-400"><%= t('footer_quick_links') %></h3>
+                <ul class="space-y-2">
+                    <li><a href="/<%= lng %>/" class="hover:text-amber-400 transition-colors"><%= t('nav.home') %></a></li>
+                    <li><a href="/<%= lng %>/portfolio" class="hover:text-amber-400 transition-colors"><%= t('nav.portfolio') %></a></li>
+                    <li><a href="/<%= lng %>/blog" class="hover:text-amber-400 transition-colors"><%= t('nav.blog') %></a></li>
+                    <li><a href="/<%= lng %>/#contact" class="hover:text-amber-400 transition-colors"><%= t('nav.contact') %></a></li>
+                </ul>
+            </div>
+            <!-- İletişim -->
+            <div id="contact">
+                <h3 class="font-bold text-xl mb-4 text-amber-400"><%= t('footer_contact_info') %></h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><i class="fas fa-map-marker-alt mr-2 text-amber-400"></i> <%= t('footer_address') %></li>
+                    <li><i class="fas fa-envelope mr-2 text-amber-400"></i> info@beezy.studio</li>
+                    <li><i class="fas fa-phone mr-2 text-amber-400"></i> +90 555 123 4567</li>
+                </ul>
+            </div>
+            <!-- Sosyal Medya -->
+            <div>
+                <h3 class="font-bold text-xl mb-4 text-amber-400"><%= t('footer_follow_us') %></h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-2xl hover:text-amber-400 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-10 pt-6 border-t border-gray-700">
+            <p>&copy; <%= new Date().getFullYear() %> Beezy Design Studio. <%= t('footer_rights_reserved') %> | Seri No: <%= new Date().getTime() %></p>
+        </div>
+    </div>
+</footer> 

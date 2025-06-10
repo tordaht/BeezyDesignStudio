@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - Beezy Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="/images/beezy-logo.png">
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E7EB;
+        }
+        .sidebar {
+            background-color: #111111;
+        }
+        .sidebar a {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #D4AF37;
+            color: #0A0A0A;
+        }
+        .card {
+            background-color: #1A1A1A;
+            border: 1px solid #2A2A2A;
+        }
+        .btn-primary {
+            background-color: #D4AF37;
+            color: #0A0A0A;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #B8935F;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 flex-shrink-0">
+            <div class="p-6 text-center border-b border-gray-700">
+                <a href="/admin.html" class="flex items-center justify-center space-x-3">
+                    <img src="/images/beezy-logo.png" alt="Beezy Studio Logo" class="h-10">
+                    <span class="text-2xl font-bold text-white">Admin Paneli</span>
+                </a>
+            </div>
+            <nav class="p-4">
+                <a href="#dashboard" class="flex items-center p-3 rounded-lg text-lg active">
+                    <i class="fas fa-tachometer-alt w-6 text-center mr-3"></i>
+                    <span>Gösterge Paneli</span>
+                </a>
+                <a href="#services" class="flex items-center p-3 rounded-lg text-lg">
+                    <i class="fas fa-concierge-bell w-6 text-center mr-3"></i>
+                    <span>Hizmetler</span>
+                </a>
+                 <a href="#portfolio" class="flex items-center p-3 rounded-lg text-lg">
+                    <i class="fas fa-briefcase w-6 text-center mr-3"></i>
+                    <span>Portfolyo</span>
+                </a>
+                <a href="#site-settings" class="flex items-center p-3 rounded-lg text-lg">
+                    <i class="fas fa-cogs w-6 text-center mr-3"></i>
+                    <span>Site Ayarları</span>
+                </a>
+                <a href="#blog" class="flex items-center p-3 rounded-lg text-lg">
+                    <i class="fas fa-blog w-6 text-center mr-3"></i>
+                    <span>Blog</span>
+                </a>
+                <a href="/" target="_blank" class="flex items-center p-3 rounded-lg text-lg mt-8 border-t border-gray-700 pt-4">
+                    <i class="fas fa-external-link-alt w-6 text-center mr-3"></i>
+                    <span>Siteyi Görüntüle</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Ana İçerik -->
+        <main class="flex-1 p-10 overflow-y-auto">
+            <header class="mb-10">
+                <h1 class="text-4xl font-bold text-white">Gösterge Paneli</h1>
+                <p class="text-lg text-gray-400">Beezy Studio içerik yönetim sistemine hoş geldiniz.</p>
+            </header>
+
+            <!-- İçerik Alanı -->
+            <div class="w-full md:w-3/4 lg:w-4/5 p-10" id="content-area">
+                <!-- İçerik buraya yüklenecek -->
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold text-white">Yönetim Paneline Hoş Geldiniz</h1>
+                    <p class="text-gray-400 mt-2">Sol menüden yönetmek istediğiniz bölümü seçin.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentArea = document.getElementById('content-area');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    
+                    navLinks.forEach(l => l.classList.remove('bg-amber-400', 'text-gray-900'));
+                    link.classList.add('bg-amber-400', 'text-gray-900');
+                    
+                    loadContent(targetId);
+                });
+            });
+
+            function loadContent(targetId) {
+                if (targetId === '#services') {
+                    loadServicesManager();
+                } else if (targetId === '#portfolio') {
+                    loadPortfolioManager();
+                } else if (targetId === '#blog') {
+                    loadBlogManager();
+                } else {
+                    if (targetId === '#dashboard') {
+                        contentArea.innerHTML = `
+                            <div class="text-center">
+                                <h1 class="text-4xl font-bold text-white">Yönetim Paneline Hoş Geldiniz</h1>
+                                <p class="text-gray-400 mt-2">Sol menüden yönetmek istediğiniz bölümü seçin.</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            async function loadServicesManager() {
+                try {
+                    const response = await fetch('/api/services');
+                    if (!response.ok) throw new Error('Servisler yüklenemedi.');
+                    const services = await response.json();
+
+                    let formHTML = `
+                        <h2 class="text-3xl font-bold text-white mb-6">Hizmetleri Yönet</h2>
+                        <form id="services-form" class="space-y-8">
+                    `;
+                    services.forEach((service, index) => {
+                        formHTML += `
+                            <div class="card p-6 rounded-lg">
+                                <h3 class="text-xl font-bold text-amber-400 mb-4">Hizmet ${index + 1}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="icon-${index}" class="block text-sm font-medium text-gray-300 mb-1">Ikon (Font Awesome)</label>
+                                        <input type="text" id="icon-${index}" value="${service.icon}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white focus:ring-amber-400 focus:border-amber-400">
+                                    </div>
+                                    <div>
+                                        <label for="title-${index}" class="block text-sm font-medium text-gray-300 mb-1">Başlık</label>
+                                        <input type="text" id="title-${index}" value="${service.title}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white focus:ring-amber-400 focus:border-amber-400">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="desc-${index}" class="block text-sm font-medium text-gray-300 mb-1">Açıklama</label>
+                                        <textarea id="desc-${index}" rows="3" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white focus:ring-amber-400 focus:border-amber-400">${service.description}</textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="id-${index}" value="${service.id}">
+                            </div>
+                        `;
+                    });
+
+                    formHTML += `
+                            <div class="flex justify-end">
+                                <button type="submit" class="btn-primary font-bold py-3 px-6 rounded-lg text-lg">Değişiklikleri Kaydet</button>
+                            </div>
+                        </form>
+                        <div id="success-message" class="mt-4 p-4 bg-green-800 text-green-200 border border-green-600 rounded-md hidden">Hizmetler başarıyla güncellendi!</div>
+                    `;
+                    contentArea.innerHTML = formHTML;
+
+                    document.getElementById('services-form').addEventListener('submit', saveServices);
+
+                } catch (error) {
+                    contentArea.innerHTML = `<div class="text-red-500">${error.message}</div>`;
+                }
+            }
+
+            async function saveServices(e) {
+                e.preventDefault();
+                const form = e.target;
+                const services = [];
+                const serviceCount = form.querySelectorAll('.card').length;
+
+                for (let i = 0; i < serviceCount; i++) {
+                    services.push({
+                        id: form.querySelector(`#id-${i}`).value,
+                        icon: form.querySelector(`#icon-${i}`).value,
+                        title: form.querySelector(`#title-${i}`).value,
+                        description: form.querySelector(`#desc-${i}`).value,
+                    });
+                }
+                
+                try {
+                    const response = await fetch('/api/services', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(services),
+                    });
+
+                    if (!response.ok) throw new Error('Kaydetme başarısız.');
+                    
+                    const result = await response.json();
+                    const successMessage = document.getElementById('success-message');
+                    successMessage.textContent = result.message;
+                    successMessage.classList.remove('hidden');
+                    setTimeout(() => successMessage.classList.add('hidden'), 3000);
+
+                } catch (error) {
+                     alert(error.message);
+                }
+            }
+
+            async function loadPortfolioManager() {
+                try {
+                    const response = await fetch('/api/portfolio');
+                    if (!response.ok) throw new Error('Portfolyo yüklenemedi.');
+                    const portfolio = await response.json();
+
+                    let formHTML = `
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-3xl font-bold text-white">Portfolyo Yönet</h2>
+                            <button id="add-project" class="btn-primary font-bold py-2 px-4 rounded-lg">Yeni Proje Ekle</button>
+                        </div>
+                        <form id="portfolio-form" class="space-y-8">
+                    `;
+                    portfolio.forEach((project, index) => {
+                        formHTML += `
+                            <div class="card p-6 rounded-lg relative" data-id="${project.id}">
+                                <button type="button" class="delete-project absolute top-4 right-4 text-red-500 hover:text-red-400 text-xl">&times;</button>
+                                <h3 class="text-xl font-bold text-amber-400 mb-4">Proje ${index + 1}: ${project.title}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="p-title-${index}" class="block text-sm font-medium text-gray-300 mb-1">Proje Başlığı</label>
+                                        <input type="text" id="p-title-${index}" value="${project.title}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div>
+                                        <label for="p-category-${index}" class="block text-sm font-medium text-gray-300 mb-1">Kategori</label>
+                                        <input type="text" id="p-category-${index}" value="${project.category}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="p-cover-${index}" class="block text-sm font-medium text-gray-300 mb-1">Kapak Görseli (örn: /images/proje.jpg)</label>
+                                        <input type="text" id="p-cover-${index}" value="${project.cover_image}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="p-short-desc-${index}" class="block text-sm font-medium text-gray-300 mb-1">Kısa Açıklama (Kart için)</label>
+                                        <textarea id="p-short-desc-${index}" rows="2" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">${project.short_description}</textarea>
+                                    </div>
+                                     <div class="md:col-span-2">
+                                        <label for="p-detail-summary-${index}" class="block text-sm font-medium text-gray-300 mb-1">Detaylı Açıklama (Proje sayfası için)</label>
+                                        <textarea id="p-detail-summary-${index}" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">${project.detail_summary}</textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="p-id-${index}" value="${project.id}">
+                            </div>
+                        `;
+                    });
+
+                    formHTML += `
+                            <div class="flex justify-end mt-8">
+                                <button type="submit" class="btn-primary font-bold py-3 px-6 rounded-lg text-lg">Tüm Portfolyoyu Kaydet</button>
+                            </div>
+                        </form>
+                        <div id="portfolio-success-message" class="mt-4 p-4 bg-green-800 text-green-200 border border-green-600 rounded-md hidden"></div>
+                    `;
+                    contentArea.innerHTML = formHTML;
+
+                    document.getElementById('portfolio-form').addEventListener('submit', savePortfolio);
+                    document.getElementById('add-project').addEventListener('click', addProject);
+                    document.querySelectorAll('.delete-project').forEach(btn => btn.addEventListener('click', deleteProject));
+
+                } catch (error) {
+                    contentArea.innerHTML = `<div class="text-red-500">${error.message}</div>`;
+                }
+            }
+
+            async function savePortfolio(e) {
+                e.preventDefault();
+                const form = e.target;
+                const projects = [];
+                const projectElements = form.querySelectorAll('.card');
+
+                projectElements.forEach((el, index) => {
+                     projects.push({
+                        id: el.querySelector(`#p-id-${index}`).value,
+                        title: el.querySelector(`#p-title-${index}`).value,
+                        category: el.querySelector(`#p-category-${index}`).value,
+                        short_description: el.querySelector(`#p-short-desc-${index}`).value,
+                        cover_image: el.querySelector(`#p-cover-${index}`).value,
+                        detail_summary: el.querySelector(`#p-detail-summary-${index}`).value,
+                        technologies: [], // Şimdilik boş, daha sonra geliştirilebilir
+                        gallery_images: [] // Şimdilik boş
+                    });
+                });
+                
+                try {
+                    const response = await fetch('/api/portfolio', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(projects),
+                    });
+
+                    if (!response.ok) throw new Error('Kaydetme başarısız.');
+                    
+                    const result = await response.json();
+                    const successMessage = document.getElementById('portfolio-success-message');
+                    successMessage.textContent = result.message;
+                    successMessage.classList.remove('hidden');
+                    setTimeout(() => successMessage.classList.add('hidden'), 3000);
+
+                } catch (error) {
+                     alert(error.message);
+                }
+            }
+            
+            function addProject() {
+                // Bu özellik bir sonraki adımda eklenecektir.
+                alert('Yeni proje ekleme özelliği yakında eklenecek!');
+            }
+            
+            function deleteProject(e) {
+                if (confirm('Bu projeyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
+                    e.target.closest('.card').remove();
+                    // Not: Silme işlemi "Tüm Portfolyoyu Kaydet" butonuna basılana kadar kalıcı değildir.
+                }
+            }
+
+            async function loadBlogManager() {
+                 try {
+                    const response = await fetch('/api/blog');
+                    if (!response.ok) throw new Error('Blog yazıları yüklenemedi.');
+                    const posts = await response.json();
+
+                    let formHTML = `
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-3xl font-bold text-white">Blog Yönetimi</h2>
+                            <button id="add-post" class="btn-primary font-bold py-2 px-4 rounded-lg">Yeni Yazı Ekle</button>
+                        </div>
+                        <form id="blog-form" class="space-y-8">
+                    `;
+                    posts.forEach((post, index) => {
+                        formHTML += `
+                            <div class="card p-6 rounded-lg relative" data-id="${post.id}">
+                                <button type="button" class="delete-post absolute top-4 right-4 text-red-500 hover:text-red-400 text-xl">&times;</button>
+                                <h3 class="text-xl font-bold text-amber-400 mb-4">Yazı ${index + 1}: ${post.title}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="b-title-${index}" class="block text-sm font-medium text-gray-300 mb-1">Yazı Başlığı</label>
+                                        <input type="text" id="b-title-${index}" value="${post.title}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div>
+                                        <label for="b-author-${index}" class="block text-sm font-medium text-gray-300 mb-1">Yazar</label>
+                                        <input type="text" id="b-author-${index}" value="${post.author}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="b-cover-${index}" class="block text-sm font-medium text-gray-300 mb-1">Kapak Görseli</label>
+                                        <input type="text" id="b-cover-${index}" value="${post.cover_image}" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label for="b-summary-${index}" class="block text-sm font-medium text-gray-300 mb-1">Özet (Liste için)</label>
+                                        <textarea id="b-summary-${index}" rows="3" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">${post.summary}</textarea>
+                                    </div>
+                                     <div class="md:col-span-2">
+                                        <label for="b-content-${index}" class="block text-sm font-medium text-gray-300 mb-1">İçerik (HTML destekler)</label>
+                                        <textarea id="b-content-${index}" rows="10" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">${post.content}</textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="b-id-${index}" value="${post.id}">
+                                <input type="hidden" id="b-date-${index}" value="${post.publish_date}">
+                            </div>
+                        `;
+                    });
+
+                    formHTML += `
+                            <div class="flex justify-end mt-8">
+                                <button type="submit" class="btn-primary font-bold py-3 px-6 rounded-lg text-lg">Tüm Yazıları Kaydet</button>
+                            </div>
+                        </form>
+                        <div id="blog-success-message" class="mt-4 p-4 bg-green-800 text-green-200 border border-green-600 rounded-md hidden"></div>
+                    `;
+                    contentArea.innerHTML = formHTML;
+
+                    document.getElementById('blog-form').addEventListener('submit', saveBlog);
+                    document.getElementById('add-post').addEventListener('click', addBlogPost);
+                    document.querySelectorAll('.delete-post').forEach(btn => btn.addEventListener('click', deleteBlogPost));
+
+                } catch (error) {
+                    contentArea.innerHTML = `<div class="text-red-500">${error.message}</div>`;
+                }
+            }
+            
+            async function saveBlog(e) {
+                e.preventDefault();
+                const form = e.target;
+                const posts = [];
+                const postElements = form.querySelectorAll('.card');
+
+                postElements.forEach((el, index) => {
+                     posts.push({
+                        id: el.querySelector(`#b-id-${index}`).value,
+                        title: el.querySelector(`#b-title-${index}`).value,
+                        summary: el.querySelector(`#b-summary-${index}`).value,
+                        content: el.querySelector(`#b-content-${index}`).value,
+                        author: el.querySelector(`#b-author-${index}`).value,
+                        publish_date: el.querySelector(`#b-date-${index}`).value,
+                        cover_image: el.querySelector(`#b-cover-${index}`).value,
+                    });
+                });
+                
+                try {
+                    const response = await fetch('/api/blog', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(posts.reverse()), // Yeni eklenenler üste gelsin diye
+                    });
+
+                    if (!response.ok) throw new Error('Kaydetme başarısız.');
+                    
+                    const result = await response.json();
+                    const successMessage = document.getElementById('blog-success-message');
+                    successMessage.textContent = result.message;
+                    successMessage.classList.remove('hidden');
+                    loadBlogManager(); // Listeyi yenile
+                    setTimeout(() => successMessage.classList.add('hidden'), 3000);
+
+                } catch (error) {
+                     alert(error.message);
+                }
+            }
+
+            function addBlogPost() {
+                 const newId = 'yeni-yazi-' + Date.now();
+                 const today = new Date().toISOString().split('T')[0];
+
+                 const newPostHTML = `
+                    <div class="card p-6 rounded-lg relative border-2 border-amber-400" data-id="${newId}">
+                        <button type="button" class="delete-post absolute top-4 right-4 text-red-500 hover:text-red-400 text-xl">&times;</button>
+                        <h3 class="text-xl font-bold text-amber-400 mb-4">Yeni Yazı</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Yazı Başlığı</label>
+                                <input type="text" id="b-title-new" value="Yeni Blog Yazısı" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Yazar</label>
+                                <input type="text" id="b-author-new" value="Beezy Studio" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Kapak Görseli</label>
+                                <input type="text" id="b-cover-new" value="/images/default-blog.jpg" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Özet</label>
+                                <textarea id="b-summary-new" rows="3" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white"></textarea>
+                            </div>
+                                <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-300 mb-1">İçerik (HTML destekler)</label>
+                                <textarea id="b-content-new" rows="10" class="w-full bg-gray-800 border border-gray-700 rounded-md p-2 text-white"></textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" id="b-id-new" value="${newId}">
+                        <input type="hidden" id="b-date-new" value="${today}">
+                    </div>
+                `;
+                
+                const form = document.getElementById('blog-form');
+                form.insertAdjacentHTML('afterbegin', newPostHTML);
+                 
+                // Yeni elemanlar için event listener ekle
+                form.querySelector('.delete-post').addEventListener('click', deleteBlogPost);
+                // Yeni oluşturulan ID'leri dinamik ve eşsiz yapalım
+                const newCard = form.querySelector(`[data-id="${newId}"]`);
+                newCard.querySelectorAll('[id$="-new"]').forEach(el => {
+                    el.id = el.id.replace('-new', `-${form.querySelectorAll('.card').length - 1}`);
+                });
+            }
+
+            function deleteBlogPost(e) {
+                if (confirm('Bu yazıyı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
+                    e.target.closest('.card').remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

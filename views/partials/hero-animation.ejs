@@ -1,0 +1,192 @@
+<!-- Three.js ve Post-Processing Kütüphaneleri -->
+<!-- Bu scriptler ana EJS dosyasından (index.ejs) yüklenecek -->
+
+<div id="hero-canvas-container" class="absolute inset-0 z-0 bg-black opacity-30"></div>
+
+<script>
+    // Three.js kütüphanelerinin ana şablonda (index.ejs) yüklendiği varsayılır.
+    
+    // --- Değişkenlerin Tanımlanması ---
+    let scene, camera, renderer, composer, particleSystem;
+    let mouseX = 0, mouseY = 0;
+    let clock = new THREE.Clock();
+    
+    // Beezy'nin marka renk paleti (Sarı/Kehribar tonları)
+    const beezyPalette = [
+        new THREE.Color(0xFFC700), // Ana Altın Sarısı
+        new THREE.Color(0xFFA200), // Kehribar
+        new THREE.Color(0xFFE073), // Açık Sarı
+        new THREE.Color(0xFFD34F)  // Orta Altın
+    ];
+
+    // --- Gürültü (Noise) Fonksiyonu ---
+    const SimplexNoise = (function() {
+        const F2 = 0.5 * (Math.sqrt(3.0) - 1.0), G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
+        const F3 = 1.0 / 3.0, G3 = 1.0 / 6.0;
+        let p = new Uint8Array(256);
+        for(let i=0; i<256; i++) p[i] = i;
+        let n;
+        for(let i=255; i>0; i--) { n = Math.floor((i+1)*Math.random()); let t = p[i]; p[i] = p[n]; p[n] = t; }
+        let perm = new Uint8Array(512);
+        let permMod12 = new Uint8Array(512);
+        for(let i=0; i<512; i++) { perm[i] = p[i & 255]; permMod12[i] = perm[i] % 12; }
+        let grad3 = new Float32Array([1,1,0, -1,1,0, 1,-1,0, -1,-1,0, 1,0,1, -1,0,1, 1,0,-1, -1,0,-1, 0,1,1, 0,-1,1, 0,1,-1, 0,-1,-1]);
+        return {
+            noise3D: function(xin, yin, zin) {
+                let n0, n1, n2, n3; 
+                let s = (xin + yin + zin) * F3;
+                let i = Math.floor(xin + s), j = Math.floor(yin + s), k = Math.floor(zin + s);
+                let t = (i + j + k) * G3;
+                let X0 = i - t, Y0 = j - t, Z0 = k - t;
+                let x0 = xin - X0, y0 = yin - Y0, z0 = zin - Z0;
+                let i1, j1, k1, i2, j2, k2;
+                if (x0 >= y0) {
+                    if (y0 >= z0) { i1=1; j1=0; k1=0; i2=1; j2=1; k2=0; }
+                    else if (x0 >= z0) { i1=1; j1=0; k1=0; i2=1; j2=0; k2=1; }
+                    else { i1=0; j1=0; k1=1; i2=1; j2=0; k2=1; }
+                } else {
+                    if (y0 < z0) { i1=0; j1=0; k1=1; i2=0; j2=1; k2=1; }
+                    else if (x0 < z0) { i1=0; j1=1; k1=0; i2=0; j2=1; k2=1; }
+                    else { i1=0; j1=1; k1=0; i2=1; j2=1; k2=0; }
+                }
+                let x1 = x0 - i1 + G3, y1 = y0 - j1 + G3, z1 = z0 - k1 + G3;
+                let x2 = x0 - i2 + 2.0 * G3, y2 = y0 - j2 + 2.0 * G3, z2 = z0 - k2 + 2.0 * G3;
+                let x3 = x0 - 1.0 + 3.0 * G3, y3 = y0 - 1.0 + 3.0 * G3, z3 = z0 - 1.0 + 3.0 * G3;
+                let ii = i & 255, jj = j & 255, kk = k & 255;
+                let t0 = 0.6 - x0*x0 - y0*y0 - z0*z0;
+                if (t0 < 0) n0 = 0.0;
+                else { t0 *= t0; let gi0 = permMod12[ii+perm[jj+perm[kk]]]; n0 = t0 * t0 * (grad3[gi0*3]*x0 + grad3[gi0*3+1]*y0 + grad3[gi0*3+2]*z0); }
+                let t1 = 0.6 - x1*x1 - y1*y1 - z1*z1;
+                if (t1 < 0) n1 = 0.0;
+                else { t1 *= t1; let gi1 = permMod12[ii+i1+perm[jj+j1+perm[kk+k1]]]; n1 = t1 * t1 * (grad3[gi1*3]*x1 + grad3[gi1*3+1]*y1 + grad3[gi1*3+2]*z1); }
+                let t2 = 0.6 - x2*x2 - y2*y2 - z2*z2;
+                if (t2 < 0) n2 = 0.0;
+                else { t2 *= t2; let gi2 = permMod12[ii+i2+perm[jj+j2+perm[kk+k2]]]; n2 = t2 * t2 * (grad3[gi2*3]*x2 + grad3[gi2*3+1]*y2 + grad3[gi2*3+2]*z2); }
+                let t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
+                if (t3 < 0) n3 = 0.0;
+                else { t3 *= t3; let gi3 = permMod12[ii+1+perm[jj+1+perm[kk+1]]]; n3 = t3 * t3 * (grad3[gi3*3]*x3 + grad3[gi3*3+1]*y3 + grad3[gi3*3+2]*z3); }
+                return 32.0 * (n0 + n1 + n2 + n3);
+            }
+        };
+    })();
+    const noise = SimplexNoise;
+
+    // --- Kurulum Fonksiyonu ---
+    function initAnimation() {
+        const container = document.getElementById('hero-canvas-container');
+        if (!container || typeof THREE === 'undefined') {
+            console.error('Three.js or container not found.');
+            return;
+        }
+        
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+        camera.position.z = 100;
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+        
+        const renderScene = new THREE.RenderPass(scene, camera);
+        const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(container.offsetWidth, container.offsetHeight), 1.5, 0.4, 0.85);
+        bloomPass.threshold = 0.21;
+        bloomPass.strength = 1.0;
+        bloomPass.radius = 0.55;
+        
+        composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        const geometry = new THREE.PlaneGeometry(400, 400, 150, 150);
+        
+        const colors = [];
+        for (let i = 0; i < geometry.attributes.position.count; i++) {
+            colors.push(0, 0, 0);
+        }
+        geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.8,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            opacity: 0.9
+        });
+
+        particleSystem = new THREE.Points(geometry, material);
+        scene.add(particleSystem);
+
+        window.addEventListener('resize', () => onWindowResize(container), false);
+        document.addEventListener('mousemove', onMouseMove, false);
+
+        animate();
+    }
+    
+    function onWindowResize(container) {
+        if (!renderer || !camera || !composer) return;
+        const width = container.offsetWidth;
+        const height = container.offsetHeight;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+        composer.setSize(width, height);
+    }
+
+    function onMouseMove(event) {
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function animate() {
+        if (!particleSystem) {
+             requestAnimationFrame(animate);
+             return;
+        }
+
+        requestAnimationFrame(animate);
+        const elapsedTime = clock.getElapsedTime();
+        const positions = particleSystem.geometry.attributes.position;
+        const colors = particleSystem.geometry.attributes.color;
+        const vertexCount = positions.count;
+
+        for (let i = 0; i < vertexCount; i++) {
+            const x = positions.getX(i);
+            const y = positions.getY(i);
+            
+            const noiseFactor = 0.01;
+            const noise1 = noise.noise3D(x * noiseFactor, y * noiseFactor, elapsedTime * 0.2) * 15;
+            const noise2 = noise.noise3D(x * 0.005, y * 0.005, elapsedTime * 0.4) * 20;
+            positions.setZ(i, noise1 + noise2);
+
+            // Renkleri Z pozisyonuna ve palete göre dinamik olarak değiştiriyoruz.
+            const z = positions.getZ(i);
+            const colorIndex = Math.floor(Math.abs(Math.sin(elapsedTime * 0.1 + z * 0.1)) * beezyPalette.length);
+            const color = beezyPalette[colorIndex];
+            
+            // Parlaklığı Z pozisyonuna göre ayarla
+            const lightness = Math.min(1, 0.6 + Math.abs(z) * 0.01);
+            const finalColor = color.clone().multiplyScalar(lightness);
+
+            colors.setXYZ(i, finalColor.r, finalColor.g, finalColor.b);
+        }
+        
+        positions.needsUpdate = true;
+        colors.needsUpdate = true;
+        
+        camera.position.x += (mouseX * 20 - camera.position.x) * 0.02;
+        camera.position.y += (mouseY * 20 - camera.position.y) * 0.02;
+        camera.lookAt(scene.position);
+
+        composer.render();
+    }
+
+    // Animasyonu başlat
+    // DOM'un tamamen yüklendiğinden emin olmak için bekle
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnimation);
+    } else {
+        initAnimation();
+    }
+</script> 

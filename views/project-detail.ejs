@@ -1,38 +1,24 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="<%= lng %>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proje Detayı: Dijital Fuar Deneyimi - Beezy Studio</title>
-    <meta name="description" content="Beezy Studio tarafından geliştirilen yenilikçi dijital fuar deneyimi projesinin detayları. 3D interaktif standlar ve showreel videosu.">
+    <title><%= project.title[lng] %> - Proje Detayı - Beezy Studio</title>
+    <meta name="description" content="<%= project.short_description[lng] %>">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/png" href="assets/images/beezy-logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" type="image/png" href="/assets/images/beezy-logo.png">
 
 </head>
-<body class="bg-[#0A0A0A] text-white font-sans">
+<body class="bg-gray-900 text-white font-sans">
 
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
 
     <!-- Header -->
-    <header id="main-header" class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-50">
-        <div class="logo-container">
-            <a href="index.html" class="flex items-center space-x-3">
-                <img src="assets/images/beezy-logo.png" alt="Beezy Studio Logo" class="h-10">
-                <span class="text-2xl font-bold">Beezy Studio</span>
-            </a>
-        </div>
-        <nav>
-            <ul class="flex space-x-8 text-lg">
-                <li><a href="index.html#services" class="hover:text-amber-400 transition-colors">Hizmetler</a></li>
-                <li><a href="portfolio.html" class="hover:text-amber-400 transition-colors">Portfolyo</a></li>
-                <li><a href="index.html#contact" class="hover:text-amber-400 transition-colors">İletişim</a></li>
-            </ul>
-        </nav>
-    </header>
+    <%- include('partials/header') %>
 
     <!-- Ana İçerik -->
     <main class="pt-32 pb-20">
@@ -40,37 +26,30 @@
 
             <!-- Proje Başlığı -->
             <div class="text-center mb-12 g-fade-up">
-                <a href="portfolio.html" class="text-amber-400 hover:underline mb-4 inline-block"><i class="fas fa-arrow-left"></i> Portfolyoya Dön</a>
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tight">Dijital Fuar Deneyimi</h1>
-                <p class="text-xl text-gray-400 mt-4 max-w-3xl mx-auto">Müşteri taleplerinde %74 artış sağlayan, yenilikçi 3D stand ve dijital etkileşim platformu.</p>
+                <a href="/<%= lng %>/portfolio" class="text-amber-400 hover:underline mb-4 inline-block"><i class="fas fa-arrow-left"></i> <%= t('back_to_portfolio') %></a>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight"><%= project.title[lng] %></h1>
+                <p class="text-xl text-gray-400 mt-4 max-w-3xl mx-auto"><%= project.short_description[lng] %></p>
             </div>
 
-            <!-- Ana Video (Showreel) -->
+            <!-- Ana Görsel/Video -->
             <div class="mb-16 g-fade-up">
                 <div class="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-2xl shadow-amber-500/10">
-                    <!-- Gerçek video URL'si ile değiştirilecek -->
-                     <video class="w-full h-full object-contain" controls autoplay muted loop poster="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg">
-                        <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4">
-                        Tarayıcınız video etiketini desteklemiyor.
-                    </video>
+                    <img src="<%= project.cover_image %>" alt="<%= project.title[lng] %>" class="w-full h-full object-cover">
                 </div>
             </div>
             
             <!-- Proje Detayları -->
             <div class="grid md:grid-cols-3 gap-10 text-lg">
                 <div class="md:col-span-2 g-fade-up">
-                    <h2 class="text-3xl font-bold mb-4 text-amber-400">Proje Özeti</h2>
-                    <p class="mb-4 text-gray-300">Bu proje, geleneksel fuarcılık anlayışını dijital dünyaya taşıyarak, markaların ürün ve hizmetlerini küresel bir kitleye interaktif ve etkileyici bir şekilde sunmalarını sağlamak amacıyla geliştirildi. Kullanıcıların sanal olarak gezebileceği 3D fuar standları, canlı ürün demoları ve anlık iletişim modülleri ile zenginleştirilmiş bir platform oluşturduk.</p>
-                    <p class="text-gray-300">Teknolojiyi ve yaratıcılığı birleştirerek, katılımcılar için unutulmaz bir deneyim yaratırken, müşterimiz için ölçülebilir ve somut sonuçlar elde ettik. Proje, lansmanının ilk 3 ayında müşteri taleplerinde %74'lük bir artış sağlayarak büyük bir başarıya imza attı.</p>
+                    <h2 class="text-3xl font-bold mb-4 text-amber-400"><%= t('project_summary') %></h2>
+                    <p class="mb-4 text-gray-300"><%= project.detail_summary[lng] %></p>
                 </div>
                 <div class="g-fade-up">
-                     <h2 class="text-3xl font-bold mb-4 text-amber-400">Kullanılan Teknolojiler</h2>
+                     <h2 class="text-3xl font-bold mb-4 text-amber-400"><%= t('technologies_used') %></h2>
                      <ul class="space-y-3">
-                         <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Three.js & WebGL</li>
-                         <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>GSAP Animasyon Motoru</li>
-                         <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Node.js & WebSocket</li>
-                         <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>TailwindCSS</li>
-                         <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i>Figma & Spline</li>
+                        <% project.technologies.forEach(tech => { %>
+                            <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i><%= tech %></li>
+                        <% }); %>
                      </ul>
                 </div>
             </div>
@@ -78,18 +57,24 @@
             <div class="mt-20">
                 <h2 class="text-4xl font-bold text-center mb-10 g-fade-up">Proje Galerisi</h2>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+1" class="rounded-lg w-full"></div>
-                    <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+2" class="rounded-lg w-full"></div>
+                    <% if (project.gallery_images && project.gallery_images.length > 0) { %>
+                        <% project.gallery_images.forEach(image => { %>
+                            <div class="g-fade-up"><img src="/<%= image %>" class="rounded-lg w-full"></div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+1" class="rounded-lg w-full"></div>
+                        <div class="g-fade-up"><img src="https://placehold.co/800x600/0A0A0A/D4AF37?text=Galeri+2" class="rounded-lg w-full"></div>
+                    <% } %>
                 </div>
             </div>
         </div>
     </main>
     
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
     <!-- JS Dosyaları -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script src="assets/js/main.js"></script>
+    <%- include('partials/scripts') %>
 
 </body>
 </html> 

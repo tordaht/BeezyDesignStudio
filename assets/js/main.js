@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
         links: 'a, button',
         portfolioGrid: '#portfolio-grid',
         filterButtons: '[data-filter]',
+        navToggle: '#nav-toggle',
+        navContent: '#nav-content',
+        themeToggle: '#theme-toggle',
+        themeToggleMobile: '#theme-toggle-mobile',
+        darkIcon: '#theme-toggle-dark-icon',
+        lightIcon: '#theme-toggle-light-icon',
     };
 
     const SETTINGS = {
@@ -190,6 +196,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function initNavigation() {
+        const navToggle = document.querySelector(SELECTORS.navToggle);
+        const navContent = document.querySelector(SELECTORS.navContent);
+
+        if (navToggle && navContent) {
+            navToggle.addEventListener('click', () => {
+                navContent.classList.toggle('hidden');
+            });
+        }
+    }
+
+    function initThemeSwitcher() {
+        const themeToggleBtn = document.querySelector(SELECTORS.themeToggle);
+        const themeToggleMobileBtn = document.querySelector(SELECTORS.themeToggleMobile);
+        const darkIcon = document.querySelector(SELECTORS.darkIcon);
+        const lightIcon = document.querySelector(SELECTORS.lightIcon);
+
+        if (!themeToggleBtn || !darkIcon || !lightIcon) return;
+        
+        const updateIcons = (isDark) => {
+            // Dark moddayken, light moda geçiş için güneş ikonunu göster.
+            // Light moddayken, dark moda geçiş için ay ikonunu göster.
+            darkIcon.classList.toggle('hidden', isDark);
+            lightIcon.classList.toggle('hidden', !isDark);
+            
+            if(themeToggleMobileBtn) {
+                 // Mobil buton için de ikonları güncelle (ID çakışmasını önlemek için ID'yi kaldır)
+                 themeToggleMobileBtn.innerHTML = isDark 
+                    ? lightIcon.outerHTML.replace(/id="[^"]*"/, '') 
+                    : darkIcon.outerHTML.replace(/id="[^"]*"/, '');
+            }
+        };
+
+        const applyTheme = (theme) => {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                updateIcons(true);
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                updateIcons(false);
+            }
+        };
+        
+        // Tarayıcı hafızasında veya sistem tercihinde tema yoksa, varsayılan olarak 'dark' başla.
+        const currentTheme = localStorage.theme || 'dark';
+        applyTheme(currentTheme);
+
+        const toggleFn = () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            applyTheme(isDark ? 'light' : 'dark');
+        };
+
+        themeToggleBtn.addEventListener('click', toggleFn);
+        if(themeToggleMobileBtn) {
+            themeToggleMobileBtn.addEventListener('click', toggleFn);
+        }
+    }
+
     // --- INITIATE ALL SCRIPTS ---
     initSmoothScroll();
     initCustomCursor();
@@ -197,4 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initInteractiveCards();
     initHeaderScrollEffect();
     initPortfolioFilter();
+    initNavigation();
+    initThemeSwitcher();
 }); 

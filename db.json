@@ -1,0 +1,107 @@
+{
+  "services": [
+    {
+      "id": "1",
+      "icon": "fas fa-vector-square",
+      "title": {
+        "tr": "Kurumsal Kimlik ve Strateji",
+        "en": "Corporate Identity and Strategy"
+      },
+      "description": {
+        "tr": "Markanızın DNA'sını oluşturuyor, hedef kitlenizle rezonans kuracak görsel ve stratejik temelleri atıyoruz.",
+        "en": "We build your brand's DNA, laying the visual and strategic foundations that resonate with your target audience."
+      }
+    },
+    {
+      "id": "2",
+      "icon": "fas fa-code",
+      "title": {
+        "tr": "Web & Mobil Uygulama Geliştirme",
+        "en": "Web & Mobile App Development"
+      },
+      "description": {
+        "tr": "Modern teknolojileri kullanarak, kullanıcı dostu, hızlı ve ölçeklenebilir web siteleri ve mobil uygulamalar tasarlıyoruz.",
+        "en": "Using modern technologies, we design user-friendly, fast, and scalable websites and mobile applications."
+      }
+    },
+    {
+      "id": "3",
+      "icon": "fas fa-palette",
+      "title": {
+        "tr": "2D & 3D Görsel Tasarım",
+        "en": "2D & 3D Visual Design"
+      },
+      "description": {
+        "tr": "Ürünleriniz, mimari projeleriniz veya konseptleriniz için fotogerçekçi 3D modellemeler ve göz alıcı 2D tasarımlar hazırlıyoruz.",
+        "en": "We prepare photorealistic 3D models and stunning 2D designs for your products, architectural projects, or concepts."
+      }
+    }
+  ],
+  "portfolio": [
+    {
+      "id": "kurumsal-kimlik-yenileme",
+      "title": {
+        "tr": "Kurumsal Kimlik Yenileme",
+        "en": "Corporate Identity Renewal"
+      },
+      "category": {
+        "tr": "Tasarım",
+        "en": "Design"
+      },
+      "short_description": {
+        "tr": "Markanızın DNA'sını yeniden kodlayarak pazarda fark yaratan, bütünleşik bir kimlik oluşturuyoruz.",
+        "en": "We create an integrated identity that makes a difference in the market by recoding your brand's DNA."
+      },
+      "cover_image": "/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg",
+      "detail_summary": {
+        "tr": "Bu proje, köklü bir markanın dijital çağdaki imajını tazelemek amacıyla başlatıldı. Kapsamlı pazar analizi ve marka atölyeleri sonucunda, hedef kitleyle daha güçlü bir bağ kuran, modern ve dinamik bir görsel kimlik tasarladık. Logo, renk paleti, tipografi ve tüm kurumsal materyaller bu yeni strateji doğrultusunda yenilendi.",
+        "en": "This project was initiated to refresh the image of a well-established brand in the digital age. As a result of comprehensive market analysis and brand workshops, we designed a modern and dynamic visual identity that establishes a stronger bond with the target audience. The logo, color palette, typography, and all corporate materials were renewed in line with this new strategy."
+      },
+      "technologies": ["Figma", "Adobe Illustrator", "Brand Strategy", "Market Analysis"],
+      "gallery_images": [
+        "/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg"
+      ]
+    },
+    {
+      "id": "dijital-fuar-deneyimi",
+      "title": {
+        "tr": "Dijital Fuar Deneyimi",
+        "en": "Digital Fair Experience"
+      },
+      "category": "M.I.C.E.",
+      "short_description": {
+        "tr": "Yenilikçi 3D standlar ve etkileşimli platformlarla fuar deneyimini dijital dünyaya taşıyoruz.",
+        "en": "We bring the exhibition experience to the digital world with innovative 3D booths and interactive platforms."
+      },
+      "cover_image": "/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg",
+      "detail_summary": {
+        "tr": "Geleneksel fuarcılık anlayışını dijital dünyaya taşıyarak, markaların ürün ve hizmetlerini küresel bir kitleye interaktif ve etkileyici bir şekilde sunmalarını sağladık. Kullanıcıların sanal olarak gezebileceği 3D fuar standları, canlı ürün demoları ve anlık iletişim modülleri ile zenginleştirilmiş bir platform oluşturduk.",
+        "en": "By carrying the traditional exhibition concept into the digital world, we enabled brands to present their products and services to a global audience in an interactive and impressive way. We created a platform enriched with 3D exhibition stands that users can visit virtually, live product demos, and instant communication modules."
+      },
+      "technologies": ["Three.js", "WebGL", "GSAP", "Node.js", "WebSocket"],
+      "gallery_images": [
+        "/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg"
+      ]
+    }
+  ],
+  "blog": [
+    {
+      "id": "stratejik-tasarimin-gucu",
+      "title": {
+        "tr": "Stratejik Tasarımın Gücü: Markanızı Geleceğe Nasıl Taşır?",
+        "en": "The Power of Strategic Design: How to Carry Your Brand to the Future"
+      },
+      "summary": {
+        "tr": "Tasarım sadece estetikten ibaret değildir. Başarılı bir marka, stratejik düşünce ile şekillendirilmiş bir tasarım diline sahip olmalıdır. Bu yazıda, stratejik tasarımın temellerini ve markanız için neden hayati olduğunu inceliyoruz.",
+        "en": "Design is not just about aesthetics. A successful brand must have a design language shaped by strategic thinking. In this article, we examine the fundamentals of strategic design and why it is vital for your brand."
+      },
+      "content": {
+        "tr": "<p>Tasarımın sadece renkler ve şekillerden ibaret olduğu yanılgısı, birçok markanın potansiyelini tam olarak kullanmasının önündeki en büyük engeldir. Oysa stratejik tasarım, bir markanın değerlerini, hedeflerini ve hedef kitlesiyle kurmak istediği ilişkiyi görsel bir dile döken bir disiplindir.</p><p>Stratejik tasarım sürecimiz şu adımlardan oluşur: Keşif, Strateji Geliştirme, Tasarım ve Uygulama. Her adımda, pazar analizlerinden ve kullanıcı araştırmalarından elde ettiğimiz verilerle hareket ederiz. Sonuç olarak ortaya çıkan şey sadece 'güzel' bir logo veya web sitesi değil, markanızın hikayesini anlatan, tutarlı ve etkili bir kimliktir.</p>",
+        "en": "<p>The misconception that design is only about colors and shapes is the biggest obstacle preventing many brands from realizing their full potential. However, strategic design is a discipline that translates a brand's values, goals, and the desired relationship with its target audience into a visual language.</p><p>Our strategic design process consists of the following steps: Discovery, Strategy Development, Design, and Implementation. At each step, we act on data obtained from market analysis and user research. The result is not just a 'beautiful' logo or website, but a consistent and effective identity that tells your brand's story.</p>"
+      },
+      "author": "Beezy Studio",
+      "publish_date": "2024-07-28",
+      "cover_image": "/images/blog-post-1.jpg"
+    }
+  ]
+} 

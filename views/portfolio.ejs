@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="<%= lng %>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projelerimiz - Beezy Design Studio | İstanbul</title>
+    <title><%= t('portfolio_title') %> - Beezy Design Studio | İstanbul</title>
     
     <meta name="description" content="Beezy Design Studio'nun M.I.C.E., 2D/3D tasarım, motion graphics ve marka stratejisi alanlarındaki projelerini keşfedin. Markalara nasıl değer kattığımızı görün.">
 
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
     <style>
         .filter-btn.active {
             background-color: var(--brand-gold);
@@ -27,133 +27,85 @@
         }
     </style>
 </head>
-<body class="antialiased bg-black">
+<body class="antialiased bg-black text-white">
 
     <!-- Özel İmleç -->
     <div class="cursor"></div>
 
     <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 nav-blur">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="h-10 w-auto">
-                <img src="assets/images/beezy-logo.png" alt="Beezy Design Studio Logo" class="h-full w-auto">
-            </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html#services" class="text-gray-300 hover:text-white transition-colors">Hizmetler</a>
-                <a href="index.html#process" class="text-gray-300 hover:text-white transition-colors">Süreç</a>
-                <a href="portfolio.html" class="text-gray-300 hover:text-white transition-colors font-bold text-amber-400">Projeler</a>
+    <%- include('partials/header') %>
+
+    <main class="pt-32 pb-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 g-fade-up">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight"><%= t('portfolio_title') %></h1>
+                <p class="text-xl text-gray-400 mt-4 max-w-3xl mx-auto"><%= t('portfolio_subtitle') %></p>
             </div>
-            <a href="index.html#contact" class="hidden md:block bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg shadow-amber-900/40">
-                İletişime Geç
-            </a>
-        </nav>
-    </header>
 
-    <main class="pt-32">
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug">Projelerimiz</h1>
-                    <p class="text-lg text-gray-400 mt-4">Markalar için yarattığımız dönüşüm hikayeleri.</p>
-                </div>
-                
-                <!-- Filter Buttons -->
-                <div class="flex justify-center flex-wrap gap-4 mb-16" id="portfolio-filters">
-                    <button class="filter-btn active font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="all">Tümü</button>
-                    <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="mice">M.I.C.E.</button>
-                    <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="design">2D & 3D Tasarım</button>
-                    <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="mograph">Mograph & Video</button>
-                </div>
+            <!-- Filter Buttons -->
+            <div class="flex justify-center flex-wrap gap-4 mb-16" id="portfolio-filters">
+                <button class="filter-btn active font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="all">Tümü</button>
+                <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="mice"><%= t('category.mice') %></button>
+                <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="design"><%= t('category.design') %></button>
+                <button class="filter-btn font-semibold px-5 py-2 rounded-lg border-2 border-transparent hover:border-amber-400 transition-all" data-filter="mograph"><%= t('category.mograph') %></button>
+            </div>
 
-                <!-- Portfolio Grid -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10" id="portfolio-grid">
-                    
-                    <!-- Proje Kartı 1 -->
-                    <div class="g-fade-up portfolio-item">
+            <!-- Proje Listesi -->
+            <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <% portfolio.forEach(project => { %>
+                    <div class="g-fade-up portfolio-card" data-category="<%= project.category %>">
                         <div class="image-container group">
-                            <img src="assets/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg" alt="Kurumsal Kimlik Yenileme Projesi" class="w-full h-auto object-cover"/>
+                            <a href="/<%= lng %>/project-detail/<%= project.id %>">
+                                <img src="/<%= project.cover_image %>" alt="<%= project.title[lng] %>" class="w-full h-72 object-cover"/>
+                            </a>
                             <div class="overlay">
-                                <a href="project-detail.html" class="portfolio-link">Detayları Gör <i class="fas fa-arrow-right"></i></a>
+                                <a href="/<%= lng %>/project-detail/<%= project.id %>" class="portfolio-link"><%= t('view_details') %> <i class="fas fa-arrow-right"></i></a>
                             </div>
                         </div>
-                        <div class="p-4">
-                            <h3 class="text-2xl font-bold text-white mt-2">Kurumsal Kimlik Yenileme</h3>
-                            <p class="mt-2 text-gray-400">Markanızın DNA'sını yeniden kodlayarak pazarda fark yaratan, bütünleşik bir kimlik oluşturuyoruz.</p>
+                        <div class="p-4 bg-gray-900">
+                            <h3 class="text-2xl font-bold text-white mt-2"><%= project.title[lng] %></h3>
+                            <p class="mt-2 text-gray-400"><%= project.short_description[lng] %></p>
                         </div>
                     </div>
-
-                    <!-- Proje Kartı 2 -->
-                     <div class="g-fade-up portfolio-item">
-                        <div class="image-container group">
-                           <img src="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg" alt="Dijital Fuar Deneyimi Projesi" class="w-full h-auto object-cover"/>
-                           <div class="overlay">
-                               <a href="project-detail.html" class="portfolio-link">Detayları Gör <i class="fas fa-arrow-right"></i></a>
-                           </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="text-2xl font-bold text-white mt-2">Dijital Fuar Deneyimi</h3>
-                            <p class="mt-2 text-gray-400">Yenilikçi 3D standlar ve etkileşimli platformlarla fuar deneyimini dijital dünyaya taşıyoruz.</p>
-                        </div>
-                    </div>
-
-                    <!-- Proje 3 -->
-                    <div class="portfolio-card g-fade-up" data-category="mograph">
-                        <div class="overflow-hidden rounded-xl aspect-video bg-black">
-                           <iframe 
-                                src="https://www.youtube.com/embed/MAouypRo04I" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                allowfullscreen
-                                class="w-full h-full">
-                           </iframe>
-                        </div>
-                        <div class="p-4">
-                             <p class="text-sm font-semibold text-amber-400">Mograph & Video</p>
-                            <h3 class="text-2xl font-bold text-white mt-1">Ürün Lansman Videosu</h3>
-                        </div>
-                    </div>
-
-                    <!-- Proje 4 (ve diğerleri buraya eklenebilir) -->
-
-                </div>
+                <% }); %>
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-gray-800/50">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2024 Beezy Design Studio. Tüm hakları saklıdır. | Seri No: v1.2.0</p>
-        </div>
-    </footer>
+    <%- include('partials/footer') %>
     
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-    <script src="assets/js/main.js" defer></script>
+    <%- include('partials/scripts') %>
     <script>
         // Portfolyo filtreleme script'i
         document.addEventListener('DOMContentLoaded', () => {
             const filters = document.querySelectorAll('#portfolio-filters .filter-btn');
             const projects = document.querySelectorAll('#portfolio-grid .portfolio-card');
 
+            if (!filters.length || !projects.length) return;
+
             filters.forEach(filter => {
                 filter.addEventListener('click', function() {
-                    // Aktif butonu ayarla
                     filters.forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
 
                     const selectedFilter = this.getAttribute('data-filter');
 
-                    // Projeleri göster/gizle
                     projects.forEach(project => {
+                        project.style.display = 'none';
                         if (selectedFilter === 'all' || project.getAttribute('data-category') === selectedFilter) {
-                            project.style.display = 'block';
+                            gsap.to(project, {
+                                duration: 0.5,
+                                autoAlpha: 1,
+                                onStart: () => project.style.display = 'block'
+                            });
                         } else {
-                            project.style.display = 'none';
+                             gsap.to(project, {
+                                duration: 0.5,
+                                autoAlpha: 0,
+                                onComplete: () => project.style.display = 'none'
+                            });
                         }
                     });
                 });
