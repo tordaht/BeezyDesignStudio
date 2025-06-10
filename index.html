@@ -59,7 +59,7 @@
                     Midjourney Prompt Önerisi:
                     A stunning, abstract 3D visualization of collective intelligence, a swarm of golden light particles flowing together to create a complex, hive-like neural network structure, dark atmospheric background with deep magenta and cyan highlights, cinematic lighting, photorealistic, octane render, 8k --ar 16:9 --style raw --v 6.0
                 -->
-                <img src="assets/images/beezy-studio-kreatif-ajans-istanbul-hero.jpg" alt="Yaratıcı enerji ve kolektif zekayı temsil eden soyut arkaplan" class="w-full h-full object-cover opacity-40">
+                <img loading="lazy" class="lazy-load w-full h-full object-cover opacity-40" data-src="assets/images/beezy-studio-kreatif-ajans-istanbul-hero.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Yaratıcı enerji ve kolektif zekayı temsil eden soyut arkaplan">
             </div>
 
             <div class="relative z-10 px-4">
@@ -155,18 +155,18 @@
                     <p class="text-4xl md:text-5xl font-bold text-white mt-4 max-w-3xl mx-auto !leading-snug g-fade-up">Markalar İçin Yarattığımız Değer</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-10">
-                    <div class="g-fade-up portfolio-item">
+                    <div class="g-fade-up portfolio-item project-card">
                         <div class="image-container group">
-                           <img src="assets/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg" alt="Kurumsal Kimlik Yenileme Projesi" class="w-full h-auto object-cover"/>
+                           <img loading="lazy" class="lazy-load w-full h-auto object-cover" data-src="assets/images/proje-kurumsal-kimlik-yenileme-beezy-studio.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Kurumsal Kimlik Yenileme Projesi"/>
                         </div>
                         <div class="p-4">
                             <h3 class="text-2xl font-bold text-white mt-2">Kurumsal Kimlik Yenileme</h3>
                             <p class="mt-2 text-gray-400"><span class="font-semibold text-gray-200">Sonuç:</span> Etkileşimi %87 artıran ve pazar payını genişleten bütünleşik marka kimliği.</p>
                         </div>
                     </div>
-                     <div class="g-fade-up md:mt-24 portfolio-item">
+                     <div class="g-fade-up md:mt-24 portfolio-item project-card">
                          <div class="image-container group">
-                           <img src="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg" alt="Dijital Fuar Deneyimi Projesi" class="w-full h-auto object-cover"/>
+                           <img loading="lazy" class="lazy-load w-full h-auto object-cover" data-src="assets/images/proje-dijital-fuar-deneyimi-beezy-studio.jpg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Dijital Fuar Deneyimi Projesi"/>
                         </div>
                         <div class="p-4">
                             <h3 class="text-2xl font-bold text-white mt-2">Dijital Fuar Deneyimi</h3>
@@ -198,9 +198,12 @@
                 <h2 class="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto !leading-tight g-fade-up">Markanızın hikayesini birlikte yeniden yazalım mı?</h2>
                 <p class="mt-6 text-xl text-gray-400 g-fade-up">Projenizi ve hedeflerinizi görüşmek için bize ulaşın.</p>
                 <div class="mt-12 g-fade-up">
-                     <a href="mailto:hello@beezy.ist" class="text-3xl md:text-4xl font-semibold text-white border-b-2 border-amber-400 hover:text-amber-400 transition-colors duration-300 pb-2">
-                        hello@beezy.ist
-                     </a>
+                     <form id="contact-form" class="space-y-4">
+                        <label for="email" class="block text-lg">E-posta:</label>
+                        <input type="email" id="email" class="form-input text-black w-full px-4 py-2 rounded" required>
+                        <span id="email-error" class="text-red-500 text-sm" aria-live="polite"></span>
+                        <button type="submit" class="mt-2 bg-amber-500 text-black font-semibold px-6 py-2 rounded">Gönder</button>
+                     </form>
                 </div>
                 <!-- Social Links -->
                 <div class="mt-16 g-fade-up">
@@ -228,6 +231,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
     <script src="assets/js/main.js" defer></script>
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', (e) => {
+        const emailField = document.getElementById('email');
+        if (!emailField.validity.valid) {
+          document.getElementById('email-error').textContent = 'Lütfen geçerli bir e-posta adresi giriniz';
+          e.preventDefault();
+        }
+      });
+    </script>
 
 </body>
 </html> 

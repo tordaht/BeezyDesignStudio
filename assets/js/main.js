@@ -190,6 +190,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function initProjectCardAnimation() {
+        gsap.to('.project-card', {
+            scrollTrigger: {
+                trigger: '#portfolio',
+                start: 'top center',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            duration: 1.5
+        });
+    }
+
+    function initLazyLoad() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.src = entry.target.dataset.src;
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        document.querySelectorAll('.lazy-load').forEach(img => {
+            observer.observe(img);
+        });
+    }
+
     // --- INITIATE ALL SCRIPTS ---
     initSmoothScroll();
     initCustomCursor();
@@ -197,4 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initInteractiveCards();
     initHeaderScrollEffect();
     initPortfolioFilter();
-}); 
+    initProjectCardAnimation();
+    initLazyLoad();
+});

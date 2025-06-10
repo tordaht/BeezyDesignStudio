@@ -7,6 +7,7 @@
     --brand-gold: #D4AF37;
     --brand-gold-light: #e6c667;
     --border-color: rgba(255, 255, 255, 0.1);
+    --primary-hover: scale(1.05);
 }
 
 /* Lenis smooth scroll için gerekli ayarlar */
@@ -150,6 +151,15 @@ h1, h2, h3, h4 {
     transform: scale(1.05);
 }
 
+/* Mikro Etkileşimler için Proje Kartı */
+.project-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: var(--primary-hover);
+}
+
 header {
     z-index: 1000;
     transition: background-color 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
@@ -164,4 +174,10 @@ header.scrolled {
 
 .logo-container {
     transition: transform 0.3s ease;
-} 
+}
+
+/* Basit İletişim Formu Stili */
+#contact-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
